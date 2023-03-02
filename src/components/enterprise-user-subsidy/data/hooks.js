@@ -103,7 +103,8 @@ export function useSubscriptionLicense({
   useEffect(() => {
     async function retrieveUserLicense() {
       let result = await fetchExistingUserLicense(enterpriseId);
-
+      console.log("user license ");
+      console.log(result);
       if (features.ENABLE_AUTO_APPLIED_LICENSES) {
         const customerAgreementMetadata = [
           customerAgreementConfig?.uuid,
@@ -152,6 +153,7 @@ export function useSubscriptionLicense({
 
   const activateUserLicense = useCallback(async (autoActivated = false) => {
     try {
+      console.log("actullay going to the api ");
       await activateLicense(license.activationKey);
 
       sendEnterpriseTrackEvent(

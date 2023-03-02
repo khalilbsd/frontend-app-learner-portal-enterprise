@@ -13,7 +13,7 @@ export function fetchSubscriptionLicensesForUser(enterpriseUUID) {
 
 export async function activateLicense(activationKey) {
   const config = getConfig();
-
+  console.log("i'm in the api ");
   // If the user has not refreshed their JWT since they created their account,
   // we should refresh it so that they'll have appropriate roles (if available),
   // and thus, have any appropriate permissions when making downstream requests.

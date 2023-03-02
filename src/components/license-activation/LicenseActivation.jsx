@@ -24,6 +24,7 @@ const LicenseActivation = () => {
     const activateLicense = async () => {
       const autoActivated = !!fromLocation;
       try {
+        console.log("post to api to activate")
         await activateUserLicense(autoActivated);
         setActivationSuccess(true);
       } catch (error) {

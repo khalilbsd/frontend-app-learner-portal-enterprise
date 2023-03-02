@@ -20,7 +20,9 @@ const LicenseActivationPage = () => {
   const { subscriptionLicense } = useContext(UserSubsidyContext);
   const { activationKey } = useParams();
   const renderContactHelpText = useRenderContactHelpText(enterpriseConfig);
-
+  console.log(subscriptionLicense)
+  console.log(LICENSE_STATUS)
+  console.log(!subscriptionLicense || subscriptionLicense.status !== LICENSE_STATUS.ASSIGNED)
   if (!subscriptionLicense || subscriptionLicense.status !== LICENSE_STATUS.ASSIGNED) {
     if (!subscriptionLicense) {
       logInfo(`User ${user.id} attempted to activate a license with activation key ${activationKey}, but has no license.`);
@@ -47,6 +49,7 @@ const LicenseActivationPage = () => {
     );
     // User will be redirected to the correct activation link due to AutoActivateLicense.
     return (
+      console.log("error"),
       <LicenseActivationErrorAlert
         title={`License Activation - ${enterpriseConfig.name}`}
         contactHelpText={renderContactHelpText(Alert.Link)}
@@ -54,7 +57,7 @@ const LicenseActivationPage = () => {
     );
   }
 
-  return <LicenseActivation />;
+  return console.log("nheb n'activi"),<LicenseActivation />;
 };
 
 export default LicenseActivationPage;
