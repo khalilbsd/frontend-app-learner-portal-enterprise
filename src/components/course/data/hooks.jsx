@@ -350,7 +350,7 @@ export const useCourseEnrollmentUrl = ({
   baseQueryParams.set(ENROLLMENT_COURSE_RUN_KEY_QUERY_PARAM, courseRunKey);
 
   const baseEnrollmentOptions = {
-    next: `${config.LMS_BASE_URL}/courses/${courseRunKey}/course`,
+    redirect_url: `${config.LMS_BASE_URL}/courses/${courseRunKey}/course`,
     // Redirect back to the same page with a failure query param
     failure_url: `${global.location.origin}${location.pathname}?${baseQueryParams.toString()}`,
   };
