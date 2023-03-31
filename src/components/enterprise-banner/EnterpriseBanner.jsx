@@ -10,7 +10,7 @@ export default function EnterpriseBanner() {
   const { enterpriseConfig } = useContext(AppContext);
   const isSearchPage = `/${ enterpriseConfig.slug }/search` === location.pathname;
   return (
-    <div className="enterprise-banner bg-brand-secondary border-brand-tertiary">
+    <div className="enterprise-banner border-brand-tertiary">
       <Container size="lg">
         <div className="row banner-content">
           <h1 className="h2 mb-0 py-3 pl-3 text-brand-secondary">

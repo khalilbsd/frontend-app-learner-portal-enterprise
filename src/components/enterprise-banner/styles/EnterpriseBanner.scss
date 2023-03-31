@@ -1,4 +1,6 @@
 .enterprise-banner {
+  background: rgb(44,228,180);
+background: linear-gradient(22deg, rgba(44,228,180,1) 25%, rgba(26,70,222,1) 80%);
   .banner-content{
     justify-content: space-between;
   }
@@ -6,9 +8,11 @@
     margin: 1%;
     height: max-content;
   }
+
 }
 
 .border-brand-tertiary {
   border-bottom-width: 7px;
   border-bottom-style: solid;
 }
+
