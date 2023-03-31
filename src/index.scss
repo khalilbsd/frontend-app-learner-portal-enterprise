@@ -4,7 +4,7 @@
 // frontend-enterprise-* imports must come before the paragon overrides for correct styling
 @import "~@edx/frontend-enterprise-catalog-search";
 @import "@edx/brand/paragon/overrides";
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
 
@@ -28,3 +28,36 @@ $fa-font-path: "~font-awesome/fonts";
 @import "./components/pathway/styles";
 @import "./components/program-progress/styles";
 @import "./components/enterprise-user-subsidy/enterprise-offers/styles";
+
+:root{
+    --unnamed-color-f6d738: #f6d738;
+      --unnamed-color-edbd31: #edbd31;
+      --unnamed-color-3e4b80: #3e4b80;
+      --unnamed-color-eaf0f4: #eaf0f4;
+      --unnamed-color-de1a47: #de1a47;
+      --unnamed-color-bdc7e8: #bdc7e8;
+      --unnamed-color-e5903b: #e5903b;
+      --unnamed-color-ffffff: #ffffff;
+      --unnamed-color-777777: #777777;
+      --unnamed-color-1c1c1c: #1c1c1c;
+      --unnamed-color-2ce4b4: #2ce4b4;
+      --unnamed-color-1a46de: #1a46de;
+      --unnamed-font-family-montserrat: Montserrat;
+      --unnamed-font-style-normal: normal;
+      --unnamed-font-weight-600: 600px;
+      --unnamed-font-weight-medium: medium;
+      --unnamed-font-weight-bold: bold;
+      --unnamed-font-weight-normal: normal;
+      --unnamed-font-size-16: calc(16px * 0.7);
+      --unnamed-font-size-18: calc(18px * 0.7);
+      --unnamed-font-size-24: calc(24px * 0.7);
+      --unnamed-character-spacing-0: 0px;
+      --unnamed-line-spacing-24: 24px;
+      --unnamed-line-spacing-32: 32px;
+      --unnamed-line-spacing-38: 38px;
+      --unnamed-line-spacing-41: 41px;
+  }
+
+  *:not(.icon,.fa){
+    font-family: 'Montserrat' !important;
+  }

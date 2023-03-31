@@ -80,7 +80,7 @@ export default function DashboardPage() {
       <Helmet title={PAGE_TITLE} />
 
       <Container size="lg">
-        <h2 className="h1 mb-4 mt-4">
+        <h2 className="h1 mb-4 mt-4 welcome-title">
           {userFirstName ? `Welcome, ${userFirstName}!` : 'Welcome!'}
         </h2>
         <Tabs defaultActiveKey="courses">
