@@ -52,7 +52,7 @@ export default function DashboardPage() {
           {LICENCE_ACTIVATION_MESSAGE}
         </Alert>
       </Container>
-      <Container size="lg" className="py-5">
+      <Container size="lg" className="py-5 px-0">
         <Row>
           <CourseEnrollmentsContextProvider>
             <CourseEnrollmentFailedAlert className="mt-0 mb-3" enrollmentSource={ENROLLMENT_SOURCE.DASHBOARD} />

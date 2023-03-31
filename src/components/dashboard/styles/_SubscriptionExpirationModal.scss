@@ -15,15 +15,24 @@
   position: absolute !important;
   margin-left: 22vw;
 }
-.main-tabs-content{
-  display: flex;
-    gap: 2vw;
-    min-height: 85vh;
-    nav{
-      &.nav-tabs{
-        flex-direction: column;
-        width: 20vw;
-        background: white;
+
+@include media-breakpoint-up(lg) {
+  .main-tabs-content{
+    display: flex;
+      gap: 2vw;
+      min-height: 85vh;
+      nav{
+        &.nav-tabs{
+          flex-direction: column;
+          width: 20vw;
+          background: white;
+        }
+        .nav-item{
+          padding:15px 0px 15px 30px
+        }
       }
-    }
+      .tab-content{
+        margin-top: 3%;
+      }
+  }
 }
