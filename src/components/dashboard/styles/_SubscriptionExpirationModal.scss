@@ -9,7 +9,21 @@
 
 
 .welcome-title{
-  font-size: 32px !important;
-  font-weight: 300 !important;
- color: var(--unnamed-color-1a46de) !important;
+  color: var(--unnamed-color-1a46de)!important;
+  font-size: 32px!important;
+  font-weight: 300!important;
+  position: absolute !important;
+  margin-left: 22vw;
+}
+.main-tabs-content{
+  display: flex;
+    gap: 2vw;
+    min-height: 85vh;
+    nav{
+      &.nav-tabs{
+        flex-direction: column;
+        width: 20vw;
+        background: white;
+      }
+    }
 }

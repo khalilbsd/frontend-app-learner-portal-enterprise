@@ -79,11 +79,11 @@ export default function DashboardPage() {
     <>
       <Helmet title={PAGE_TITLE} />
 
-      <Container size="lg">
+      <div>
         <h2 className="h1 mb-4 mt-4 welcome-title">
           {userFirstName ? `Welcome, ${userFirstName}!` : 'Welcome!'}
         </h2>
-        <div className='tab-content'>
+        <div className='main-tabs-content'>
         <Tabs defaultActiveKey="courses">
           <Tab eventKey="courses" title="Courses">
             {CoursesTabComponent}
@@ -99,7 +99,7 @@ export default function DashboardPage() {
 
         </Tabs>
           </div>
-      </Container>
+      </div>
     </>
   );
 }
