@@ -16,16 +16,6 @@ export default function EnterpriseBanner() {
           <h1 className="h2 mb-0 py-3 pl-3 text-brand-secondary">
             {enterpriseConfig.name}
           </h1>
-          {isSearchPage
-          && (
-            <Button
-              as={Link}
-              to={`/${ enterpriseConfig.slug }/skills-quiz`}
-              variant="inverse-primary"
-              className="skills-quiz-btn"
-            > Recommend courses for me
-            </Button>
-          )}
         </div>
       </Container>
     </div>

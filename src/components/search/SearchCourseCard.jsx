@@ -84,18 +84,16 @@ const SearchCourseCard = ({ hit, isLoading }) => {
     return (
       <Card
         isClickable
-        className="h-100"
+        className="h-100 course-card"
       >
         <Card.ImageCap
           className="h-100"
           src={course.cardImageUrl}
           srcAlt=""
-          logoSrc={primaryPartnerLogo?.src}
-          logoAlt={primaryPartnerLogo?.alt}
         />
 
         <Card.Header
-          className="h-100"
+          className="h-100 course-title"
           title={(
             <Truncate lines={3} trimWhitespace>
               {course.title}

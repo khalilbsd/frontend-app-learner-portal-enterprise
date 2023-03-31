@@ -18,4 +18,51 @@
   ul.pagination {
     @extend .mb-0;
   }
+
+  .result-heading {
+    color: #1a46de;
+    font-weight: 400;
+    font-size: 32px;
+    gap: 2%;
+    display: flex;
+    align-items: center;
+
+    hr {
+      height: 5px;
+      width: 15%;
+      margin: 0;
+      background: #2ce4b4;
+      border-radius: 5px;
+      border: none;
+    }
+  }
+  .show-all-link{
+    color: black !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    display: flex  !important;
+    gap: 10px !important;
+    align-items: center !important;
+    i{
+      color:#2ce4b4 ;
+    }
+  }
+
+  .course-title{
+    .pgn__card-header-content{
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+      overflow: auto;
+      text-align: start;
+      width: 100%;
+    }
+  }
+}
+
+
+.search-header-wrapper {
+  .filters-col {
+    display: none !important;
+  }
 }

@@ -28,7 +28,7 @@ const SearchResults = ({
 }) => {
   const { refinements, dispatch } = useContext(SearchContext);
   const nbHits = useNbHitsFromSearchResults(searchResults);
-  const linkText = `Show (${nbHits}) >`;
+  const linkText = `Show (${nbHits})`;
 
   // To prevent from showing same error twice, we only render the StatusAlert when course results are zero */
   const showMessage = (type, heading) => {
@@ -82,13 +82,14 @@ const SearchResults = ({
     <Container size="lg" className="search-results my-5">
       <>
         <div className="d-flex align-items-center mb-2">
-          <h2 className="flex-grow-1 mb-2">
+          <h2 className="flex-grow-1 mb-2 result-heading">
             {isSearchStalled && (
               <Skeleton className="h2 d-block mb-3" width={240} />
             )}
             {!isSearchStalled && nbHits > 0 && (
               <>  {resultsHeading}  </>
             )}
+            <hr />
           </h2>
           {(!isSearchStalled && nbHits > 0) && (contentType !== undefined) && (
             <SearchPagination
@@ -102,7 +103,8 @@ const SearchResults = ({
               className="show-all-link btn btn-link muted-link inline-link d-inline-block pl-0 pr-4 px-xl-0"
               type="button"
             >
-              {linkText}
+              {linkText} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+
             </button>
           )}
         </div>
