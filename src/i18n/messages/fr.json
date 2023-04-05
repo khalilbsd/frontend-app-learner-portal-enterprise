@@ -55,5 +55,10 @@
     ,"tab.courses.subscription.summary.badge.expiring.soon":"Expire bientôt"
     ,"tab.courses.subscription.summary.badge.available.until":"Disponible jusqu'à"
     ,"tab.courses.subscription.summary.badge.expried.on":"Expirée le"
+    ,"header.nav.link.dropdown.switch":"Tableau de bord"
+    ,"header.nav.link.dropdown.personal":"Personnel"
+    ,"header.nav.link.dropdown.profile":"Mon profil"
+    ,"header.nav.link.dropdown.settings":"Paramètres du compte"
+    ,"header.nav.link.dropdown.logout":"Se déconnecter"
 
 }
