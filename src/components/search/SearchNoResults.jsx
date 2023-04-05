@@ -23,7 +23,6 @@ const SearchNoResults = ({ title,intl}) => {
 
           <br />
         {intl.formatMessage(messages[noResultsMessage.messageContent],{lowerCaseTitle})}
-          {noResultsMessage.messageContent}
         </div>
       </div>
     ),

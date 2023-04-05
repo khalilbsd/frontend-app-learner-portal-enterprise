@@ -38,9 +38,16 @@
           flex-direction: column;
           width: 20vw;
           background: white;
+
         }
         .nav-item{
-          padding:15px 0px 15px 30px
+          border:none;
+          padding:15px 0px 15px 30px;
+          &.active{
+            border-bottom: 0;
+            border-right: 4px solid var(--unnamed-color-1a46de);
+            color:var(--unnamed-color-1a46de) !important
+          }
         }
       }
       .tab-content{

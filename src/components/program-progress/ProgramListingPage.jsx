@@ -47,7 +47,7 @@ const ProgramListingPage = ({intl}) => {
             learnerProgramsData.map((program) => <ProgramListingCard program={program} key={program.title} />)
           ) : (
             <div className="no-content-message">
-              <h2>{intl.formatMessage(messages[NO_PROGRAMS_ERROR_MESSAGE])}</h2>
+              <h2 style={{textAlign:'center',marginBottom:'10%'}}>{intl.formatMessage(messages[NO_PROGRAMS_ERROR_MESSAGE])}</h2>
               <Link to={`/${enterpriseConfig.slug}/search?content_type=${CONTENT_TYPE_PROGRAM}`}>
                 <Button variant="primary" iconBefore={Search} className="btn-brand-primary mt-2">{intl.formatMessage(messages['tab.programs.not.enrolled.btn'])}</Button>
               </Link>

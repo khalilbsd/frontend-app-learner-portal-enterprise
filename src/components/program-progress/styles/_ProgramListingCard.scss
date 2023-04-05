@@ -1,8 +1,8 @@
 .progress-listing-card{
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   cursor: pointer;
-
+  height:450px;
   .program-card-body{
     display: flex;
     flex-direction: column;
@@ -26,12 +26,31 @@
       color: white;
     }
   }
+
+ }
+ .programs-stats-stack{
+  border-bottom: 1px solid var(--unnamed-color-bdc7e8);
+  height:60px
  }
 
+.icon-container svg{
+  width: 18px;
+  height: 18px;
+  fill: var(--unnamed-color-bdc7e8);
+}
+
+ .program-stats-bubbles{
+  font-weight: 600;
+  font-size: 15px;
+  color: black;
+}
+
   .banner-image{
-    height :165px;
+    max-height :200px;
+    height :200px;
     object-fit: cover;
     background: white;
+
   }
 
   .program-type{
@@ -51,7 +70,9 @@
 .program-title{
   color: #454545;
 }
-
+.program-card-section{
+  flex-grow: 0;
+}
 .no-content-message{
   display: flex;
   flex-direction: column;

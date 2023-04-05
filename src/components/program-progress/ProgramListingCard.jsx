@@ -34,15 +34,19 @@ const ProgramListingCard = ({ program }) => {
 
   const getBannerImageURL = () => {
     let imageURL = '';
+
+  if (program?.bannerImage){
     if (windowWidth >= breakpoints.large.minWidth) {
-      imageURL = program.bannerImage.large.url;
+
+      imageURL = program?.bannerImage?.large?.url;
     } else if (windowWidth >= breakpoints.medium.minWidth) {
-      imageURL = program.bannerImage.medium.url;
+      imageURL = program?.bannerImage?.medium?.url;
     } else if (windowWidth >= breakpoints.small.minWidth) {
-      imageURL = program.bannerImage.small.url;
+      imageURL = program?.bannerImage?.small?.url;
     } else {
-      imageURL = program.bannerImage.xSmall.url;
+      imageURL = program?.bannerImage?.xSmall?.url;
     }
+  }
     return imageURL;
   };
 
@@ -67,7 +71,13 @@ const ProgramListingCard = ({ program }) => {
         data-testid="program-banner-image"
         className="banner-image"
       />
-
+ <Card.Section className="py-3 program-card-section">
+        <ProgressCategoryBubbles
+          inProgress={program.progress.inProgress}
+          notStarted={program.progress.notStarted}
+          completed={program.progress.completed}
+        />
+      </Card.Section>
       <Card.Header
         title={(
           <Truncate lines={2} trimWhitespace>
@@ -95,13 +105,7 @@ const ProgramListingCard = ({ program }) => {
         )}
       />
 
-      <Card.Section className="py-3">
-        <ProgressCategoryBubbles
-          inProgress={program.progress.inProgress}
-          notStarted={program.progress.notStarted}
-          completed={program.progress.completed}
-        />
-      </Card.Section>
+
     </Card>
   );
 };

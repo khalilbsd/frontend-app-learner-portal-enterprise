@@ -22,8 +22,10 @@ import {
 } from './data/utils';
 
 import SubsidiesSummary from '../dashboard/sidebar/SubsidiesSummary';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const ProgramProgressPage = () => {
+const ProgramProgressPage = ({intl}) => {
   const { programUUID } = useParams();
   const [program, fetchError] = useLearnerProgramProgressData(programUUID);
 
@@ -77,6 +79,7 @@ const ProgramProgressPage = () => {
   return (
     <>
       <Helmet title={PROGRAM_TITLE} />
+
       <CourseEnrollmentsContextProvider>
         <ProgramProgressContextProvider initialState={initialState}>
           <Container fluid={false} size="lg">
@@ -86,15 +89,15 @@ const ProgramProgressPage = () => {
                 {allCoursesCompleted
                   ? (
                     <>
-                      <h3>Congratulations!</h3>
-                      <p>You have successfully completed all the requirements for the {PROGRAM_TITLE}.</p>
+                      <h3>{intl.formatMessage(messages['program.progress.page.congratulation'])}</h3>
+                      <p>{intl.formatMessage(messages['program.progress.page.congratulation.message'],{PROGRAM_TITLE})}</p>
                     </>
                   )
                   : (
                     <>
-                      <h3> Your Program Journey</h3>
-                      <p>Track and plan your progress through the {totalCoursesInProgram} courses in this program.</p>
-                      <p>To complete the program, you must earn a verified certificate for each course.</p>
+                      <h3>{intl.formatMessage(messages['program.progress.page.congratulation.journey'])}</h3>
+                      <p> {intl.formatMessage(messages['program.progress.page.congratulation.track'],{totalCoursesInProgram})}</p>
+                      <p>{intl.formatMessage(messages['program.progress.page.congratulation.certificate'])}</p>
                     </>
                   )}
                 <SubsidiesSummary
@@ -118,4 +121,4 @@ const ProgramProgressPage = () => {
   );
 };
 
-export default ProgramProgressPage;
+export default (injectIntl(ProgramProgressPage));
