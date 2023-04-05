@@ -9,8 +9,10 @@ import { UserSubsidyContext } from '../../enterprise-user-subsidy';
 import { NUM_RESULTS_TO_DISPLAY } from './data/constants';
 import { getContentTypeFromTitle } from '../../utils/search';
 import { SubsidyRequestsContext } from '../../enterprise-subsidy-requests';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../messages';
 
-const PopularResultsIndex = ({ title, numberResultsToDisplay }) => {
+const PopularResultsIndex = ({ title, numberResultsToDisplay,intl }) => {
   const { enterpriseConfig } = useContext(AppContext);
   const {
     subscriptionPlan, subscriptionLicense, couponCodes: { couponCodes }, enterpriseOffers,
@@ -38,7 +40,7 @@ const PopularResultsIndex = ({ title, numberResultsToDisplay }) => {
     filters: defaultFilter,
   };
   return (
-    <Index indexName={config.ALGOLIA_INDEX_NAME} indexId={`popular-${title}`}>
+    <Index indexName={config.ALGOLIA_INDEX_NAME} indexId={intl.formatMessage(messages['content.type.title.popular.index'],{title})}>
       <Configure {...searchConfig} />
       <PopularResults title={title} numberResultsToDisplay={numberResultsToDisplay} />
     </Index>
@@ -54,4 +56,4 @@ PopularResultsIndex.defaultProps = {
   numberResultsToDisplay: NUM_RESULTS_TO_DISPLAY,
 };
 
-export default PopularResultsIndex;
+export default (injectIntl(PopularResultsIndex));

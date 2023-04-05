@@ -6,14 +6,16 @@ import CourseSection from './CourseSection';
 import CourseEnrollmentsAlert from './CourseEnrollmentsAlert';
 import { CourseEnrollmentsContext } from './CourseEnrollmentsContextProvider';
 import { sortedEnrollmentsByEnrollmentDate } from './data/utils';
+import messages from '../../messages';
+import { injectIntl } from '@edx/frontend-platform/i18n';
 
 export const COURSE_SECTION_TITLES = {
-  current: 'My courses',
-  completed: 'Completed courses',
-  savedForLater: 'Saved for later',
+  current: 'tab.courses.main.dashbaord.my.courses',
+  completed: 'tab.courses.main.dashbaord.my.courses.completed',
+  savedForLater: 'tab.courses.main.dashbaord.my.courses.saved',
 };
 
-const CourseEnrollments = ({ children }) => {
+const CourseEnrollments = ({ children,intl }) => {
   const {
     courseEnrollmentsByStatus,
     fetchCourseEnrollmentsError,
@@ -76,15 +78,15 @@ const CourseEnrollments = ({ children }) => {
       {!hasCourseEnrollments && children}
       <>
         <CourseSection
-          title={COURSE_SECTION_TITLES.current}
+          title={intl.formatMessage(messages[COURSE_SECTION_TITLES.current])}
           courseRuns={currentCourseEnrollments}
         />
         <CourseSection
-          title={COURSE_SECTION_TITLES.completed}
+          title={intl.formatMessage(messages[COURSE_SECTION_TITLES.completed])}
           courseRuns={completedCourseEnrollments}
         />
         <CourseSection
-          title={COURSE_SECTION_TITLES.savedForLater}
+          title={intl.formatMessage(messages[COURSE_SECTION_TITLES.savedForLater])}
           courseRuns={savedForLaterCourseEnrollments}
         />
       </>
@@ -100,4 +102,4 @@ CourseEnrollments.defaultProps = {
   children: null,
 };
 
-export default CourseEnrollments;
+export default (injectIntl(CourseEnrollments));

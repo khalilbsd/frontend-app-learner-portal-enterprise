@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppContext } from '@edx/frontend-platform/react';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const SiteHeaderNavMenu = () => {
+const SiteHeaderNavMenu = ({intl}) => {
   const { enterpriseConfig } = useContext(AppContext);
   const mainMenuLinkClassName = 'nav-link';
 
@@ -13,13 +15,13 @@ const SiteHeaderNavMenu = () => {
   return (
     <>
       <NavLink to={`/${enterpriseConfig.slug}`} className={mainMenuLinkClassName} exact>
-        Dashboard
+        {intl.formatMessage(messages['header.nav.link.dashboard'])}
       </NavLink>
       <NavLink to={`/${enterpriseConfig.slug}/search`} className={mainMenuLinkClassName} exact>
-        Find a Course
+        {intl.formatMessage(messages['header.nav.link.search'])}
       </NavLink>
     </>
   );
 };
 
-export default SiteHeaderNavMenu;
+export default (injectIntl(SiteHeaderNavMenu));

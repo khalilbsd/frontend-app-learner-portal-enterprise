@@ -16,6 +16,8 @@ import {
   PROGRAM_TITLE,
 } from './constants';
 import { getContentTypeFromTitle, getNoOfResultsFromTitle, getSkeletonCardFromTitle } from '../utils/search';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
 const SearchResults = ({
   searchResults,
@@ -25,6 +27,7 @@ const SearchResults = ({
   hitComponent,
   title,
   contentType,
+  intl
 }) => {
   const { refinements, dispatch } = useContext(SearchContext);
   const nbHits = useNbHitsFromSearchResults(searchResults);
@@ -67,11 +70,12 @@ const SearchResults = ({
 
   const resultsHeading = useMemo(
     () => {
-      const resultsLabel = nbHits === 0 || nbHits > 1 ? 'results' : 'result';
+      const resultsLabel = nbHits === 0 || nbHits > 1 ? intl.formatMessage(messages['search.found.message.results']) : intl.formatMessage(messages['search.found.message.result']);
       return (
         <>
           {title} ({nbHits} {resultsLabel})
           {query && <>{' '}for &quot;{query}&quot;</>}
+          <hr />
         </>
       );
     },
@@ -86,10 +90,11 @@ const SearchResults = ({
             {isSearchStalled && (
               <Skeleton className="h2 d-block mb-3" width={240} />
             )}
+
             {!isSearchStalled && nbHits > 0 && (
               <>  {resultsHeading}  </>
             )}
-            <hr />
+
           </h2>
           {(!isSearchStalled && nbHits > 0) && (contentType !== undefined) && (
             <SearchPagination
@@ -131,7 +136,10 @@ const SearchResults = ({
           </>
         )}
         {!isSearchStalled && nbHits === 0 && getContentTypeFromTitle(title) !== CONTENT_TYPE_PATHWAY && (
+          <>
+
           <SearchNoResults title={title} />
+        </>
         )}
         {!isSearchStalled && isDefinedAndNotNull(error) && showMessage(contentType, title) && (
           <SearchError title={title} />
@@ -163,4 +171,4 @@ SearchResults.defaultProps = {
   contentType: undefined,
 };
 
-export default connectStateResults(SearchResults);
+export default connectStateResults(injectIntl(SearchResults));

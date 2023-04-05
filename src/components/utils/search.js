@@ -66,15 +66,18 @@ export const getSkeletonCardFromTitle = (title) => {
 export const getNoResultsMessage = (title) => {
   const lowerCaseTitle = title.toLowerCase();
   return {
-    messageTitle: `No ${lowerCaseTitle} were found to match your search results.`,
-    messageContent: `Check out some popular ${lowerCaseTitle} below.`,
+    messageTitle: `search.not.found.message`,
+    // messageTitle: `No ${lowerCaseTitle} were found to match your search results.`,
+    messageContent: `search.not.found.message.checkout.more`,
+    // messageContent: `Check out some popular ${lowerCaseTitle} below.`,
   };
 };
 
 export const getSearchErrorMessage = (title) => {
   const lowerCaseTitle = title.toLowerCase();
   return {
-    messageTitle: `An error occured while finding ${lowerCaseTitle} that match your search.`,
-    messageContent: 'Please try again later.',
+    // messageTitle: `An error occured while finding ${lowerCaseTitle} that match your search.`,
+    messageTitle: "search.error.message" ,
+    messageContent: 'search.error.message.try.again',
   };
 };

@@ -23,9 +23,7 @@ export default function SiteHeader() {
             <SiteHeaderNavMenu />
           </nav>
           <nav aria-label="Secondary" className="nav secondary-menu-container align-items-center ml-auto">
-            <a href={config.LEARNER_SUPPORT_URL} className="text-gray-700 mr-3">
-              Help
-            </a>
+
             <AvatarDropdown />
           </nav>
         </div>
@@ -71,11 +69,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <div className="position-absolute">
-        <HashLink to="#content" className="skip-nav-link sr-only sr-only-focusable btn btn-primary mt-3 ml-2">
-          Skip to main content
-        </HashLink>
-      </div>
+
       <MediaQuery maxWidth={768}>
         {renderMobileHeader()}
       </MediaQuery>

@@ -16,7 +16,9 @@ import { EnterpriseInvitePage } from '../enterprise-invite';
 import { ExecutiveEducation2UPage } from '../executive-education-2u';
 import { ToastsProvider, Toasts } from '../Toasts';
 
+
 export default function App() {
+
   useEffect(() => {
     if (process.env.HOTJAR_APP_ID) {
       try {

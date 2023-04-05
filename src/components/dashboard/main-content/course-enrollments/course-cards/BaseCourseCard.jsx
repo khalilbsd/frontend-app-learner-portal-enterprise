@@ -15,6 +15,8 @@ import Skeleton from 'react-loading-skeleton';
 import { EmailSettingsModal } from './email-settings';
 import { UnenrollModal } from './unenroll';
 import { COURSE_STATUSES, COURSE_PACING } from '../../../../../constants';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../../messages';
 
 const BADGE_PROPS_BY_COURSE_STATUS = {
   [COURSE_STATUSES.inProgress]: {
@@ -35,6 +37,7 @@ class BaseCourseCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      intl: this.props.intl,
       modals: {
         emailSettings: {
           open: false,
@@ -63,7 +66,7 @@ class BaseCourseCard extends Component {
         onClick: this.handleEmailSettingsButtonClick,
         children: (
           <div role="menuitem">
-            Email settings
+          {this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.email'])}
             <span className="sr-only">for {title}</span>
           </div>
         ),
@@ -76,7 +79,7 @@ class BaseCourseCard extends Component {
         onClick: this.handleUnenrollButtonClick,
         children: (
           <div role="menuitem">
-            Unenroll
+            {this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.unenroll'])}
             <span className="sr-only">from {title}</span>
           </div>
         ),
@@ -123,9 +126,14 @@ class BaseCourseCard extends Component {
     const dateMessage = this.getDateMessage();
     let message = '';
     if (pacing) {
-      message += 'This course ';
-      message += isCourseEnded ? 'was ' : 'is ';
-      message += `${pacing}-paced. `;
+      message += this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.pace']);
+      message += isCourseEnded ? this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.pace.was']) : this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.pace.is']);
+      if (pacing === 'instructor' ){
+        message += this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.pace.type.instructor'])
+      }else {
+        message += this.state.intl.formatMessage(messages['tab.courses.main.dashboard.course.pace.type.self'])
+
+      }
     }
     if (dateMessage) {
       message += dateMessage;
@@ -381,6 +389,7 @@ class BaseCourseCard extends Component {
       linkToCourse,
       hasViewCertificateLink,
       isLoading,
+
     } = this.props;
     const dropdownMenuItems = this.getDropdownMenuItems();
     return (
@@ -476,4 +485,4 @@ BaseCourseCard.defaultProps = {
   isLoading: false,
 };
 
-export default BaseCourseCard;
+export default (injectIntl(BaseCourseCard));

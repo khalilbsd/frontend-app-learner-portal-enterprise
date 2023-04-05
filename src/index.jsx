@@ -9,10 +9,18 @@ import {
 } from '@edx/frontend-platform';
 import { ErrorPage } from '@edx/frontend-platform/react';
 import { mergeConfig } from '@edx/frontend-platform/config';
-
+import appMessages from './i18n'
 import { App } from './components/app';
-
 import './index.scss';
+
+
+
+
+
+
+
+
+
 
 subscribe(APP_READY, () => {
   ReactDOM.render(<App />, document.getElementById('root'));
@@ -48,7 +56,9 @@ initialize({
       });
     },
   },
-  messages: [],
+  messages: [
+    appMessages,
+  ],
   // We don't require authenticated users so that we can perform our own auth redirect to a proxy login that depends on
   // the route, rather than the LMS like frontend-platform does.
   requireAuthenticatedUser: false,

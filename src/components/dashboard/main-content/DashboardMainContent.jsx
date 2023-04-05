@@ -10,8 +10,10 @@ import { CourseEnrollments } from './course-enrollments';
 import SupportInformation from '../sidebar/SupportInformation';
 import SubsidiesSummary from '../sidebar/SubsidiesSummary';
 import CourseRecommendations from './CourseRecommendations';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from '../messages';
 
-const DashboardMainContent = () => {
+const DashboardMainContent = ({ intl }) => {
   const {
     enterpriseConfig: {
       name,
@@ -36,29 +38,15 @@ const DashboardMainContent = () => {
           </p>
         ) : (
           <>
-            <p>
-              Getting started with edX is easy. Simply find a course from your
-              catalog, request enrollment, and get started on your learning journey.
-            </p>
-            <Button
-              as={Link}
-              to={`/${slug}/search`}
-              className="btn-brand-primary d-block d-md-inline-block"
-            >
-              Find a course
-            </Button>
-
             <br />
             <CourseRecommendations />
           </>
         )}
       </CourseEnrollments>
 
-      <MediaQuery maxWidth={breakpoints.medium.maxWidth}>
-        {matches => (matches ? <SupportInformation className="mt-5" /> : null)}
-      </MediaQuery>
+
     </>
   );
 };
 
-export default DashboardMainContent;
+export default (injectIntl(DashboardMainContent));

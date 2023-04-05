@@ -21,8 +21,11 @@ import {
   SUBSCRIPTION_WARNING_BADGE_VARIANT,
 } from './data/constants';
 import SubscriptionExpirationWarningModal from '../../program-progress/SubscriptionExpiringWarningModal';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../messages';
 
 const SubscriptionSummaryCard = ({
+  intl,
   subscriptionPlan, licenseRequest, className, courseEndDate, programProgressPage,
 }) => {
   const [
@@ -37,34 +40,34 @@ const SubscriptionSummaryCard = ({
         // Subscription has expired
         return ({
           variant: SUBSCRIPTION_EXPIRED_BADGE_VARIANT,
-          label: SUBSCRIPTION_EXPIRED_BADGE_LABEL,
+          label: intl.formatMessage(messages[SUBSCRIPTION_EXPIRED_BADGE_LABEL]),
         });
       }
       if (programProgressPage && subscriptionPlan.daysUntilExpiration <= SUBSCRIPTION_DAYS_REMAINING_SEVERE) {
         // Expiration is approaching
         return ({
           variant: SUBSCRIPTION_WARNING_BADGE_VARIANT,
-          label: SUBSCRIPTION_EXPIRING_SOON_BADGE_LABEL,
+          label: intl.formatMessage(messages[SUBSCRIPTION_EXPIRING_SOON_BADGE_LABEL]),
         });
       }
       if (!programProgressPage && subscriptionPlan.daysUntilExpiration <= SUBSCRIPTION_DAYS_REMAINING_SEVERE) {
         // Expiration is approaching
         return ({
           variant: SUBSCRIPTION_WARNING_BADGE_VARIANT,
-          label: SUBSCRIPTION_WARNING_BADGE_LABEL,
+          label: intl.formatMessage(messages[SUBSCRIPTION_WARNING_BADGE_LABEL]),
         });
       }
 
       return ({
         variant: SUBSCRIPTION_ACTIVE_BADGE_VARIANT,
-        label: SUBSCRIPTION_ACTIVE_BADGE_LABEL,
+        label: intl.formatMessage(messages[SUBSCRIPTION_ACTIVE_BADGE_LABEL]),
       });
     }
 
     if (licenseRequest) {
       return ({
         variant: LICENSE_REQUESTED_BADGE_VARIANT,
-        label: LICENSE_REQUESTED_BADGE_LABEL,
+        label: intl.formatMessage(messages[LICENSE_REQUESTED_BADGE_LABEL]),
       });
     }
 
@@ -88,7 +91,7 @@ const SubscriptionSummaryCard = ({
           <SidebarCard
             title={(
               <div className="d-flex align-items-start justify-content-between">
-                <h3>{SUBSCRIPTION_SUMMARY_CARD_TITLE}</h3>
+                <h3>{intl.formatMessage(messages[SUBSCRIPTION_SUMMARY_CARD_TITLE])}</h3>
                 <div>
                   <Badge
                     variant={badgeVariantAndLabel.variant}
@@ -107,10 +110,10 @@ const SubscriptionSummaryCard = ({
               subscriptionPlan ? (
                 <>
                   {subscriptionPlan.daysUntilExpiration > SUBSCRIPTION_EXPIRED
-                    ? SUBSCRIPTION_ACTIVE_DATE_PREFIX : SUBSCRIPTION_EXPIRED_DATE_PREFIX}
+                    ? intl.formatMessage(messages[SUBSCRIPTION_ACTIVE_DATE_PREFIX]) : intl.formatMessage(messages[SUBSCRIPTION_EXPIRED_DATE_PREFIX])}
                   {' '}<span className="font-weight-bold">{moment(subscriptionPlan.expirationDate).format('MMMM Do, YYYY')}</span>
                 </>
-              ) : <span>{LICENSE_REQUESTED_NOTICE}</span>
+              ) : <span>{intl.formatMessage(messages[LICENSE_REQUESTED_NOTICE])}</span>
             }
           </SidebarCard>
         </>
@@ -119,7 +122,7 @@ const SubscriptionSummaryCard = ({
           <SidebarCard
             title={(
               <div className="d-flex align-items-start justify-content-between">
-                <div>{SUBSCRIPTION_SUMMARY_CARD_TITLE}</div>
+                <div>{intl.formatMessage(messages[SUBSCRIPTION_SUMMARY_CARD_TITLE])}</div>
                 <div>
                   <Badge
                     variant={badgeVariantAndLabel.variant}
@@ -137,10 +140,10 @@ const SubscriptionSummaryCard = ({
               subscriptionPlan ? (
                 <>
                   {subscriptionPlan.daysUntilExpiration > SUBSCRIPTION_EXPIRED
-                    ? SUBSCRIPTION_ACTIVE_DATE_PREFIX : SUBSCRIPTION_EXPIRED_DATE_PREFIX}
+                    ? intl.formatMessage(messages[SUBSCRIPTION_ACTIVE_DATE_PREFIX]) : intl.formatMessage(messages[SUBSCRIPTION_EXPIRED_DATE_PREFIX])}
                   {' '}<span className="font-weight-bold">{moment(subscriptionPlan.expirationDate).format('MMMM Do, YYYY')}</span>
                 </>
-              ) : <span>{LICENSE_REQUESTED_NOTICE}</span>
+              ) : <span>{intl.formatMessage(messages[LICENSE_REQUESTED_NOTICE])}</span>
             }
           </SidebarCard>
         )}
@@ -167,4 +170,4 @@ SubscriptionSummaryCard.defaultProps = {
   licenseRequest: undefined,
 };
 
-export default SubscriptionSummaryCard;
+export default (injectIntl(SubscriptionSummaryCard));

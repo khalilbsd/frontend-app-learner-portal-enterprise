@@ -8,18 +8,21 @@ import { logError } from '@edx/frontend-platform/logging';
 import { CourseEnrollmentsContext } from '../../CourseEnrollmentsContextProvider';
 import { ToastsContext } from '../../../../../Toasts';
 import { unenrollFromCourse } from './data';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../../../messages';
 
 const btnLabels = {
   default: 'Unenroll',
   pending: 'Unenrolling...',
 };
 
-export default function UnenrollModal({
+ function UnenrollModal({
   courseRunId,
   enrollmentType,
   isOpen,
   onClose,
   onSuccess,
+  intl
 }) {
   const { removeCourseEnrollment } = useContext(CourseEnrollmentsContext);
   const { addToast } = useContext(ToastsContext);
@@ -60,7 +63,7 @@ export default function UnenrollModal({
             variant="tertiary"
             onClick={handleClose}
           >
-            Keep learning
+            {intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.unenroll.modal.btn.keep'])}
           </Button>
           <StatefulButton
             variant="primary"
@@ -68,7 +71,7 @@ export default function UnenrollModal({
             state={btnState}
             onClick={handleUnenrollButtonClick}
           >
-            Unenroll
+           {intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.unenroll'])}
           </StatefulButton>
         </ActionRow>
       )}
@@ -79,11 +82,12 @@ export default function UnenrollModal({
           show={!!error}
         >
           <p data-testid="unenroll-error-text">
-            An error occurred while unenrolling from your course. Please try again.
+          {intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.unenroll.modal.error'])}
+
           </p>
         </Alert>
         <p>
-          Progress that you&apos;ve made so far will not be saved.
+          {intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.unenroll.modal.progress'])}
         </p>
       </>
     </AlertModal>
@@ -97,3 +101,6 @@ UnenrollModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
 };
+
+
+export default ((injectIntl(UnenrollModal)))

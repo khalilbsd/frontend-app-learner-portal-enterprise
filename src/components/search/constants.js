@@ -8,10 +8,12 @@ export const CONTENT_TYPE_PATHWAY = 'learnerpathway';
 export const NUM_RESULTS_PROGRAM = 4;
 export const NUM_RESULTS_PATHWAY = 4;
 export const NUM_RESULTS_COURSE = 20;
-export const COURSE_TITLE = 'Courses';
-export const PROGRAM_TITLE = 'Programs';
+
+export const COURSE_TITLE = 'content.type.title.course';
+export const PROGRAM_TITLE = 'content.type.title.programs';
 export const PATHWAY_TITLE = 'Pathways';
-export const HEADER_TITLE = 'Search Courses and Programs';
+
+export const HEADER_TITLE = 'page.search.title';
 export const SEARCH_TRACKING_NAME = 'learner_portal';
 
 const OVERRIDE_FACET_FILTERS = [];

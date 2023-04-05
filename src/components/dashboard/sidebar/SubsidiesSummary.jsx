@@ -14,8 +14,11 @@ import { CATALOG_ACCESS_CARD_BUTTON_TEXT } from './data/constants';
 import SidebarCard from './SidebarCard';
 import { CourseEnrollmentsContext } from '../main-content/course-enrollments/CourseEnrollmentsContextProvider';
 import { SubsidyRequestsContext, SUBSIDY_TYPE } from '../../enterprise-subsidy-requests';
+import messages from '../messages';
+import { injectIntl } from '@edx/frontend-platform/i18n';
 
 const SubsidiesSummary = ({
+  intl,
   className, showSearchCoursesCta, totalCoursesEligibleForCertificate, courseEndDate, programProgressPage,
 }) => {
   const {
@@ -70,7 +73,7 @@ const SubsidiesSummary = ({
         variant={ctaButtonVariant}
         block
       >
-        {CATALOG_ACCESS_CARD_BUTTON_TEXT}
+        {intl.formatMessage(messages[CATALOG_ACCESS_CARD_BUTTON_TEXT])}
       </Button>
     )
   );
@@ -136,4 +139,4 @@ SubsidiesSummary.defaultProps = {
   programProgressPage: false,
 };
 
-export default SubsidiesSummary;
+export default (injectIntl(SubsidiesSummary));

@@ -6,8 +6,10 @@ import { MailtoLink, Hyperlink } from '@edx/paragon';
 import PropTypes from 'prop-types';
 import { SidebarBlock } from '../../layout';
 import { CONTACT_HELP_EMAIL_MESSAGE, NEED_HELP_BLOCK_TITLE } from './data/constants';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import messages from '../messages';
 
-const SupportInformation = ({ className }) => {
+const SupportInformation = ({ className,intl }) => {
   const config = getConfig();
   const {
     enterpriseConfig: {
@@ -16,7 +18,7 @@ const SupportInformation = ({ className }) => {
   } = useContext(AppContext);
 
   const renderContactHelpText = () => {
-    const message = CONTACT_HELP_EMAIL_MESSAGE;
+    const message = intl.formatMessage(messages[CONTACT_HELP_EMAIL_MESSAGE]);
     const adminEmails = adminUsers.map(user => user.email);
 
     if (adminEmails.length > 0) {
@@ -32,22 +34,22 @@ const SupportInformation = ({ className }) => {
 
   return (
     <SidebarBlock
-      title={NEED_HELP_BLOCK_TITLE}
+      title={intl.formatMessage(messages[NEED_HELP_BLOCK_TITLE])}
       titleOptions={{ tag: 'h3' }}
       className={className}
     >
       <p>
-        For technical support, visit the{' '}
+        {intl.formatMessage(messages['support.technical.visit'])}{' '}
         <Hyperlink
           destination={config.LEARNER_SUPPORT_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
-          edX Help Center
+          {intl.formatMessage(messages['support.technical.help.center'])}
         </Hyperlink>.
       </p>
       <p>
-        To request more benefits or specific courses, {renderContactHelpText()}.
+        {intl.formatMessage(messages['support.technical.help.rquest'])}, {renderContactHelpText()}.
       </p>
     </SidebarBlock>
   );
@@ -55,10 +57,11 @@ const SupportInformation = ({ className }) => {
 
 SupportInformation.propTypes = {
   className: PropTypes.string,
+  intl:intlShape.isRequired,
 };
 
 SupportInformation.defaultProps = {
   className: undefined,
 };
 
-export default SupportInformation;
+export default (injectIntl(SupportInformation));

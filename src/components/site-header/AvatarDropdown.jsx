@@ -5,8 +5,10 @@ import { getConfig } from '@edx/frontend-platform/config';
 import { AppContext } from '@edx/frontend-platform/react';
 import { AvatarButton, Dropdown } from '@edx/paragon';
 import { isDefinedAndNotNull } from '../../utils/common';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const AvatarDropdown = ({ showLabel }) => {
+const AvatarDropdown = ({ showLabel,intl }) => {
   const {
     BASE_URL,
     LMS_BASE_URL,
@@ -32,8 +34,8 @@ const AvatarDropdown = ({ showLabel }) => {
         style={{ maxWidth: 280 }}
         alignRight
       >
-        <Dropdown.Header className="text-uppercase">Switch Dashboard</Dropdown.Header>
-        <Dropdown.Item href={`${LMS_BASE_URL}/dashboard`}>Personal</Dropdown.Item>
+        <Dropdown.Header className="text-uppercase">{intl.formatMessage(messages['header.nav.link.dropdown.switch'])}</Dropdown.Header>
+        <Dropdown.Item href={`${LMS_BASE_URL}/dashboard`}>{intl.formatMessage(messages['header.nav.link.dropdown.personal'])}</Dropdown.Item>
         {/* TODO: support multiple enterprises! */}
         <Dropdown.Item
           as={NavLink}
@@ -47,11 +49,11 @@ const AvatarDropdown = ({ showLabel }) => {
           {enterpriseConfig.name}
         </Dropdown.Item>
         <Dropdown.Divider className="border-light" />
-        <Dropdown.Item href={`${LMS_BASE_URL}/u/${authenticatedUser.username}`}>My profile</Dropdown.Item>
-        <Dropdown.Item href={`${LMS_BASE_URL}/account/settings`}>Account settings</Dropdown.Item>
-        <Dropdown.Item href={LEARNER_SUPPORT_URL}>Help</Dropdown.Item>
+        <Dropdown.Item href={`${LMS_BASE_URL}/u/${authenticatedUser.username}`}>{intl.formatMessage(messages['header.nav.link.dropdown.profile'])}</Dropdown.Item>
+        <Dropdown.Item href={`${LMS_BASE_URL}/account/settings`}>{intl.formatMessage(messages['header.nav.link.dropdown.settings'])}</Dropdown.Item>
+
         <Dropdown.Divider className="border-light" />
-        <Dropdown.Item href={logoutUrl}>Sign out</Dropdown.Item>
+        <Dropdown.Item href={logoutUrl}>{intl.formatMessage(messages['header.nav.link.dropdown.logout'])}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -65,4 +67,4 @@ AvatarDropdown.defaultProps = {
   showLabel: true,
 };
 
-export default AvatarDropdown;
+export default (injectIntl(AvatarDropdown));

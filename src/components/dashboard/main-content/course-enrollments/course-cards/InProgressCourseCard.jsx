@@ -13,6 +13,8 @@ import Notification from './Notification';
 import { CourseEnrollmentsContext } from '../CourseEnrollmentsContextProvider';
 import { UpgradeableCourseEnrollmentContext } from '../UpgradeableCourseEnrollmentContextProvider';
 import UpgradeCourseButton from './UpgradeCourseButton';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../../messages';
 
 export const InProgressCourseCard = ({
   linkToCourse,
@@ -20,6 +22,7 @@ export const InProgressCourseCard = ({
   title,
   notifications,
   courseRunStatus,
+  intl,
   ...rest
 }) => {
   const {
@@ -79,7 +82,7 @@ export const InProgressCourseCard = ({
         },
         children: (
           <>
-            Save course for later
+            {intl.formatMessage(messages['tab.courses.main.dashboard.course.settings.save.later'])}
             <span className="sr-only">for {title}</span>
           </>
         ),
@@ -179,4 +182,4 @@ InProgressCourseCard.propTypes = {
   courseRunStatus: PropTypes.string.isRequired,
 };
 
-export default InProgressCourseCard;
+export default (injectIntl(InProgressCourseCard));

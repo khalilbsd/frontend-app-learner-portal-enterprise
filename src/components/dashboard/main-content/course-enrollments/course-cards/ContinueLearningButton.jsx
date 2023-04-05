@@ -4,6 +4,8 @@ import { AppContext } from '@edx/frontend-platform/react';
 import classNames from 'classnames';
 
 import { sendEnterpriseTrackEvent } from '@edx/frontend-enterprise-utils';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../../messages';
 
 /**
  * A 'Continue Learning' button with parameters.
@@ -15,11 +17,12 @@ import { sendEnterpriseTrackEvent } from '@edx/frontend-enterprise-utils';
  *
  * @returns {Function} A functional React component for the continue learning button.
  */
-export default function ContinueLearningButton({
+function ContinueLearningButton({
   className,
   linkToCourse,
   title,
   courseRunId,
+  intl
 }) {
   const { enterpriseConfig } = useContext(AppContext);
 
@@ -38,8 +41,8 @@ export default function ContinueLearningButton({
       href={linkToCourse}
       onClick={onClickHandler}
     >
-      Resume
-      <span className="sr-only">for {title}</span>
+      {intl.formatMessage(messages['tab.courses.main.dashboard.course.card.btn.resume'])}
+
     </a>
   );
 }
@@ -54,3 +57,7 @@ ContinueLearningButton.propTypes = {
   title: PropTypes.string.isRequired,
   courseRunId: PropTypes.string.isRequired,
 };
+
+
+
+export default (injectIntl(ContinueLearningButton))

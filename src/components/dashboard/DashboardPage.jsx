@@ -5,6 +5,7 @@ import {
   Container, Alert, Row, breakpoints, useToggle, MediaQuery, Tabs, Tab,
 } from '@edx/paragon';
 import { AppContext } from '@edx/frontend-platform/react';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 
 import { IntegrationWarningModal } from '../integration-warning-modal';
 import { MainContent, Sidebar } from '../layout';
@@ -17,10 +18,12 @@ import CourseEnrollmentFailedAlert, { ENROLLMENT_SOURCE } from '../course/Course
 import { ProgramListingPage } from '../program-progress';
 import PathwayProgressListingPage from '../pathway-progress/PathwayProgressListingPage';
 import { features } from '../../config';
+import messages from './messages';
 
-export const LICENCE_ACTIVATION_MESSAGE = 'Your license was successfully activated.';
+export const LICENCE_ACTIVATION_MESSAGE = 'license.activation';
 
-export default function DashboardPage() {
+function DashboardPage({intl}) {
+  console.log(intl);
   const { enterpriseConfig } = useContext(AppContext);
   const { subscriptionPlan, showExpirationNotifications } = useContext(UserSubsidyContext);
   const { state } = useLocation();
@@ -49,7 +52,7 @@ export default function DashboardPage() {
           className="mt-3"
           dismissible
         >
-          {LICENCE_ACTIVATION_MESSAGE}
+          {intl.formatMessage(messages[LICENCE_ACTIVATION_MESSAGE])}
         </Alert>
       </Container>
       <Container size="lg" className="py-5 px-0">
@@ -79,23 +82,23 @@ export default function DashboardPage() {
     <>
       <Helmet title={PAGE_TITLE} />
 
-      <div>
+      <div className='main-container'>
         <h2 className="h1 mb-4 mt-4 welcome-title">
-          {userFirstName ? `Welcome, ${userFirstName}!` : 'Welcome!'}
+          {userFirstName ? `${intl.formatMessage(messages['welcome.header'])}, ${userFirstName}!` : intl.formatMessage(messages['welcome'])}
         </h2>
         <div className='main-tabs-content'>
         <Tabs defaultActiveKey="courses">
-          <Tab eventKey="courses" title="Courses">
+          <Tab eventKey="courses" title={intl.formatMessage(messages['tab.courses'])}>
             {CoursesTabComponent}
           </Tab>
-          <Tab eventKey="programs" title="Programs">
+          <Tab eventKey="programs" title={intl.formatMessage(messages['tab.programs'])}>
             <ProgramListingPage />
           </Tab>
-          {features.FEATURE_ENABLE_PATHWAY_PROGRESS && (
+          {/* {features.FEATURE_ENABLE_PATHWAY_PROGRESS && (
             <Tab eventKey="pathways" title="Pathways">
               <PathwayProgressListingPage />
             </Tab>
-          )}
+          )} */}
 
         </Tabs>
           </div>
@@ -103,3 +106,7 @@ export default function DashboardPage() {
     </>
   );
 }
+
+DashboardPage.propTypes = {
+  intl: intlShape.isRequired,}
+export default  (injectIntl(DashboardPage))

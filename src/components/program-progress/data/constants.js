@@ -1,4 +1,4 @@
-export const NO_PROGRAMS_ERROR_MESSAGE = 'You are not enrolled in any programs yet.';
+export const NO_PROGRAMS_ERROR_MESSAGE = 'tab.programs.no.enrollment.found';
 
 // ProgramProgressCircle constants
 export const X_AXIS = 22;

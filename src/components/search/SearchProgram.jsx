@@ -6,8 +6,10 @@ import { getConfig } from '@edx/frontend-platform/config';
 import { NUM_RESULTS_PROGRAM, CONTENT_TYPE_PROGRAM, PROGRAM_TITLE } from './constants';
 import SearchResults from './SearchResults';
 import SearchProgramCard from './SearchProgramCard';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const SearchProgram = ({ filter }) => {
+const SearchProgram = ({ filter,intl }) => {
   const defaultFilter = `content_type:${CONTENT_TYPE_PROGRAM} AND ${filter}`;
   const config = getConfig();
 
@@ -18,7 +20,7 @@ const SearchProgram = ({ filter }) => {
         filters={defaultFilter}
         clickAnalytics
       />
-      <SearchResults hitComponent={SearchProgramCard} title={PROGRAM_TITLE} />
+      <SearchResults hitComponent={SearchProgramCard} title={intl.formatMessage(messages[PROGRAM_TITLE])} />
     </Index>
   );
 };
@@ -27,4 +29,4 @@ SearchProgram.propTypes = {
   filter: PropTypes.string.isRequired,
 };
 
-export default SearchProgram;
+export default (injectIntl(SearchProgram));

@@ -9,6 +9,8 @@ import SearchError from '../SearchError';
 import { isDefinedAndNotNull } from '../../../utils/common';
 import { NUM_RESULTS_TO_DISPLAY } from './data/constants';
 import { getHitComponentFromTitle, getSkeletonCardFromTitle } from '../../utils/search';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../messages';
 
 const PopularResults = ({
   searchResults,
@@ -16,6 +18,7 @@ const PopularResults = ({
   error,
   title,
   numberResultsToDisplay,
+  inlt
 }) => {
   const nbHits = useNbHitsFromSearchResults(searchResults);
 
@@ -38,7 +41,8 @@ const PopularResults = ({
       {!isSearchStalled && nbHits > 0 && (
         <>
           <h2>
-            {`Popular ${title}`}
+
+            {Intl.formatMessage(messages['content.type.title.popular'])}
           </h2>
           <Hits hitComponent={getHitComponentFromTitle(title)} />
         </>
@@ -65,4 +69,4 @@ PopularResults.defaultProps = {
   numberResultsToDisplay: NUM_RESULTS_TO_DISPLAY,
 };
 
-export default connectStateResults(PopularResults);
+export default connectStateResults(injectIntl(PopularResults));

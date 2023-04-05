@@ -1,0 +1,59 @@
+{
+    "welcome.header": "Bienvenue",
+    "tab.courses": "Les formations",
+    "tab.programs": "Les programmes",
+    "license.activation": "Votre licence a été activée avec succès.",
+    "get.started.with": "Commencez avec groupadoPro est très facile. Il vous suffit de trouver un cours dans le catalogue qui se conforme avec vos attentes, de demander une inscription et de commencer votre parcours d'apprentissage.",
+    "btn.find.course": "Trouver une formation",
+    "tab.courses.title.recommendation": "Obtenir des recommandations de cours pour vous",
+    "page.search.title": "Recherche de cours et de programmes",
+    "search.error.message": "Une erreur s'est produite lors de la recherche de {lowerCaseTitle} correspondant à votre recherche.",
+    "search.error.message.try.again": "Veuillez réessayer plus tard.",
+    "search.not.found.message": "Aucun {lowerCaseTitle} ne correspond à vos résultats.",
+    "search.not.found.message.checkout.more": " Consultez les {lowerCaseTitle} les plus populaires ci-dessous.",
+    "content.type.title.course": "cours",
+    "content.type.title.programs": "programmes",
+    "content.type.title.popular.index": "{title}-populaires",
+    "content.type.title.popular": "{title} populaires",
+    "search.found.message.results": "résultats",
+    "search.found.message.result": "résultat",
+    "header.nav.link.dashboard": "Tableau de bord",
+    "header.nav.link.search": "Trouver une formation",
+    "support.title": "Besoin d'aide?",
+    "support.technical.visit": "Pour une assistance technique, visitez ",
+    "support.technical.help.center": "groupado help center",
+    "support.technical.help.request": "Pour demander d'autres prestations ou des formations spécifiques,",
+    "support.technical.help.request.email": "contacter l'administrateur Groupado Pro de votre organisation.",
+    "tab.courses.main.dashbaord.my.courses": "Mes formations",
+    "tab.courses.main.dashbaord.my.courses.completed": "Formations terminés",
+    "tab.courses.main.dashbaord.my.courses.saved": "Enregistré pour plus tard",
+    "tab.courses.main.dashboard.course.card.btn.resume": "Pour continuer",
+    "tab.courses.main.dashboard.course.pace": "Ce cours ",
+    "tab.courses.main.dashboard.course.pace.is": "s'adapte ",
+    "tab.courses.main.dashboard.course.pace.was": " s'est adapté ",
+    "tab.courses.main.dashboard.course.pace.type.self": "à votre rythme d'apprentissage.",
+    "tab.courses.main.dashboard.course.pace.type.instructor": "aux rythme d'apprentissage de l'instructeur.",
+    "tab.courses.main.dashboard.course.settings.save.later": "Sauvegarder le cours pour plus tard",
+    "tab.courses.main.dashboard.course.settings.email": "Configuration d'email",
+    "tab.courses.main.dashboard.course.settings.unenroll": "Désinscrire"
+    ,"tab.courses.main.dashboard.course.settings.unenroll.modal.btn.keep":"continuer à apprendre"
+    ,"tab.courses.main.dashboard.course.settings.unenroll.modal.error":"Une erreur s'est produite lors de la désinscription de votre cours. Veuillez réessayer."
+    ,"tab.courses.main.dashboard.course.settings.unenroll.modal.progress":"votre avancement jusqu'à présent ne sera pas sauvegardé."
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.title.pending":"Enregistrement pour plus tard..."
+    ,"modal.btn.cancel":"Annuler"
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.asking.confirmation":"Êtes-vous sûr de vouloir enregistrer"
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.text":"pour plus tard ? Vous resterez inscrit, mais le cours n'apparaîtra plus comme 'en cours'"
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.license.text":"Tant que votre licence est valide, vous pouvez reprendre le cours en cliquant sur 'Déplacer le cours vers En cours' dans la liste des cours enregistrés pour plus tard."
+    ,"tab.programs.not.enrolled.btn":"Explorer les programmes"
+    ,"tab.programs.no.enrollment.found":"Vous n'êtes encore inscrit à aucun programme."
+    ,"tab.courses.subscription.summary.title":"Statut de l'abonnement"
+    ,"tab.courses.subscription.summary.requested":"En attente d'autorisation"
+    ,"tab.courses.subscription.summary.badge.active":"Actif"
+    ,"tab.courses.subscription.summary.badge.expiring":"Expirant"
+    ,"tab.courses.subscription.summary.badge.expired":"Expirée"
+    ,"tab.courses.subscription.summary.badge.requested":"Demandée"
+    ,"tab.courses.subscription.summary.badge.expiring.soon":"Expire bientôt"
+    ,"tab.courses.subscription.summary.badge.available.until":"Disponible jusqu'à"
+    ,"tab.courses.subscription.summary.badge.expried.on":"Expirée le"
+
+}

@@ -61,8 +61,8 @@
 }
 
 
-.search-header-wrapper {
-  .filters-col {
+.search-header-wrapper{
+  .fe__searchbox-col[data-testid="filters-col"]{
     display: none !important;
   }
 }

@@ -34,8 +34,10 @@ import SearchPathway from './SearchPathway';
 import SearchPathwayCard from '../pathway/SearchPathwayCard';
 import { SubsidyRequestsContext } from '../enterprise-subsidy-requests';
 import PathwayModal from '../pathway/PathwayModal';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const Search = () => {
+const Search = ({intl}) => {
   const { pathwayUUID } = useParams();
   const history = useHistory();
   const { refinements: { content_type: contentType } } = useContext(SearchContext);
@@ -84,7 +86,7 @@ const Search = () => {
     },
     [config.ALGOLIA_APP_ID, config.ALGOLIA_INDEX_NAME, config.ALGOLIA_SEARCH_API_KEY],
   );
-  const PAGE_TITLE = `${HEADER_TITLE} - ${enterpriseConfig.name}`;
+  const PAGE_TITLE = `${intl.formatMessage(messages[HEADER_TITLE])} - ${enterpriseConfig.name}`;
   const shouldDisplayBalanceAlert = hasNoEnterpriseOffersBalance || hasLowEnterpriseOffersBalance;
 
   return (
@@ -105,21 +107,14 @@ const Search = () => {
         <div className="search-header-wrapper">
           <SearchHeader
             containerSize="lg"
-            headerTitle={features.ENABLE_PROGRAMS ? HEADER_TITLE : ''}
+            headerTitle={features.ENABLE_PROGRAMS ? intl.formatMessage(messages[HEADER_TITLE]) : ''}
             index={courseIndex}
             filters={filters}
             enterpriseConfig={enterpriseConfig}
           />
         </div>
 
-        <PathwayModal
-          learnerPathwayUuid={pathwayUUID}
-          isOpen={isLearnerPathwayModalOpen}
-          onClose={() => {
-            history.push(`/${enterpriseConfig.slug}/search`);
-            onClose();
-          }}
-        />
+
 
         {canEnrollWithEnterpriseOffers && shouldDisplayBalanceAlert && (
           <EnterpriseOffersBalanceAlert hasNoEnterpriseOffersBalance={hasNoEnterpriseOffersBalance} />
@@ -127,24 +122,25 @@ const Search = () => {
 
         { (contentType === undefined || contentType.length === 0) && (
           <>
-            {
-              features.ENABLE_PATHWAYS && <SearchPathway filter={filters} />
-            }
+
             { features.ENABLE_PROGRAMS ? <SearchProgram filter={filters} /> : <div /> }
             <SearchCourse filter={filters} />
           </>
         )}
 
-        { contentType?.length > 0 && contentType[0] === CONTENT_TYPE_PATHWAY && (
+        {/* { contentType?.length > 0 && contentType[0] === CONTENT_TYPE_PATHWAY && (
           <SearchResults hitComponent={SearchPathwayCard} title={PATHWAY_TITLE} contentType={CONTENT_TYPE_PATHWAY} />
-        )}
+        )} */}
 
         { contentType?.length > 0 && contentType[0] === CONTENT_TYPE_PROGRAM && (
-          <SearchResults hitComponent={SearchProgramCard} title={PROGRAM_TITLE} contentType={CONTENT_TYPE_PROGRAM} />
+          <>
+
+          <SearchResults hitComponent={SearchProgramCard} title={intl.formatMessage(messages[PROGRAM_TITLE])} contentType={CONTENT_TYPE_PROGRAM} />
+          </>
         )}
 
         { contentType?.length > 0 && contentType[0] === CONTENT_TYPE_COURSE && (
-          <SearchResults hitComponent={SearchCourseCard} title={COURSE_TITLE} contentType={CONTENT_TYPE_COURSE} />
+          <SearchResults hitComponent={SearchCourseCard} title={intl.formatMessage(messages[COURSE_TITLE])} contentType={CONTENT_TYPE_COURSE} />
         )}
       </InstantSearch>
       <IntegrationWarningModal isOpen={enterpriseConfig.showIntegrationWarning} />
@@ -152,4 +148,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default (injectIntl(Search));

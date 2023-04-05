@@ -19,8 +19,10 @@ import { NO_PROGRAMS_ERROR_MESSAGE } from './data/constants';
 import ProgramListingCard from './ProgramListingCard';
 
 import { CONTENT_TYPE_PROGRAM } from '../search/constants';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const ProgramListingPage = () => {
+const ProgramListingPage = ({intl}) => {
   const { enterpriseConfig } = useContext(AppContext);
 
   const [learnerProgramsData, fetchError] = useLearnerProgramsListData(enterpriseConfig.uuid);
@@ -45,9 +47,9 @@ const ProgramListingPage = () => {
             learnerProgramsData.map((program) => <ProgramListingCard program={program} key={program.title} />)
           ) : (
             <div className="no-content-message">
-              <h2>{NO_PROGRAMS_ERROR_MESSAGE}</h2>
+              <h2>{intl.formatMessage(messages[NO_PROGRAMS_ERROR_MESSAGE])}</h2>
               <Link to={`/${enterpriseConfig.slug}/search?content_type=${CONTENT_TYPE_PROGRAM}`}>
-                <Button variant="primary" iconBefore={Search} className="btn-brand-primary mt-2">Explore programs</Button>
+                <Button variant="primary" iconBefore={Search} className="btn-brand-primary mt-2">{intl.formatMessage(messages['tab.programs.not.enrolled.btn'])}</Button>
               </Link>
             </div>
           )}
@@ -57,4 +59,4 @@ const ProgramListingPage = () => {
   );
 };
 
-export default ProgramListingPage;
+export default (injectIntl(ProgramListingPage));

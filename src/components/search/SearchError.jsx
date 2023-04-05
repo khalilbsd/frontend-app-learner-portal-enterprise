@@ -4,8 +4,11 @@ import { StatusAlert } from '@edx/paragon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { getSearchErrorMessage } from '../utils/search';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const SearchError = ({ title }) => {
+const SearchError = ({ title,intl }) => {
+  const lowerCaseTitle = title.toLowerCase();
   const searchErrorMessage = getSearchErrorMessage(title);
   const renderDialog = useCallback(
     () => (
@@ -14,9 +17,10 @@ const SearchError = ({ title }) => {
           <FontAwesomeIcon icon={faExclamationTriangle} size="2x" />
         </div>
         <div>
-          {searchErrorMessage.messageTitle}
+          {intl.formatMessage(messages[searchErrorMessage.messageTitle],{lowerCaseTitle})}
           <br />
-          {searchErrorMessage.messageContent}
+          {intl.formatMessage(messages[searchErrorMessage.messageContent],{lowerCaseTitle})}
+
         </div>
       </div>
     ),
@@ -38,4 +42,4 @@ SearchError.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default SearchError;
+export default (injectIntl(SearchError));

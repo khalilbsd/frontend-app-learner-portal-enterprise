@@ -6,9 +6,12 @@ import { faSearchMinus } from '@fortawesome/free-solid-svg-icons';
 
 import { PopularResults } from './popular-results';
 import { getNoResultsMessage } from '../utils/search';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-const SearchNoResults = ({ title }) => {
+const SearchNoResults = ({ title,intl}) => {
   const noResultsMessage = getNoResultsMessage(title);
+  const lowerCaseTitle = title.toLowerCase();
   const renderDialog = useCallback(
     () => (
       <div className="lead d-flex align-items-center py-3">
@@ -16,8 +19,10 @@ const SearchNoResults = ({ title }) => {
           <FontAwesomeIcon icon={faSearchMinus} size="2x" />
         </div>
         <div>
-          {noResultsMessage.messageTitle}
+        {intl.formatMessage(messages[noResultsMessage.messageTitle],{lowerCaseTitle})}
+
           <br />
+        {intl.formatMessage(messages[noResultsMessage.messageContent],{lowerCaseTitle})}
           {noResultsMessage.messageContent}
         </div>
       </div>
@@ -44,4 +49,4 @@ SearchNoResults.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default SearchNoResults;
+export default (injectIntl(SearchNoResults));

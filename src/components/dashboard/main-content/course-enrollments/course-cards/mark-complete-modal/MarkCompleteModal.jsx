@@ -7,9 +7,11 @@ import { camelCaseObject } from '@edx/frontend-platform';
 import MarkCompleteModalContext from './MarkCompleteModalContext';
 import ModalBody from './ModalBody';
 import { updateCourseCompleteStatusRequest } from './data/service';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../../../messages';
 
-export const MARK_SAVED_FOR_LATER_DEFAULT_LABEL = 'Save course for later';
-export const MARK_SAVED_FOR_LATER_PENDING_LABEL = 'Saving course for later...';
+export const MARK_SAVED_FOR_LATER_DEFAULT_LABEL = 'tab.courses.main.dashboard.course.settings.save.later';
+export const MARK_SAVED_FOR_LATER_PENDING_LABEL = 'tab.courses.main.dashboard.course.settings.save.later.model.title.pending';
 
 const initialState = {
   confirmButtonState: 'default',
@@ -24,6 +26,7 @@ const MarkCompleteModal = ({
   courseLink,
   onSuccess,
   onClose,
+  intl
 }) => {
   const { enterpriseConfig: { uuid } } = useContext(AppContext);
   const [
@@ -74,13 +77,13 @@ const MarkCompleteModal = ({
       }}
     >
       <Modal
-        title="Save course for later"
+        title={intl.formatMessage(messages[MARK_SAVED_FOR_LATER_DEFAULT_LABEL])}
         body={<ModalBody />}
         buttons={[
           <StatefulButton
             labels={{
-              default: MARK_SAVED_FOR_LATER_DEFAULT_LABEL,
-              pending: MARK_SAVED_FOR_LATER_PENDING_LABEL,
+              default: intl.formatMessage(messages[MARK_SAVED_FOR_LATER_DEFAULT_LABEL]),
+              pending: intl.formatMessage(messages[MARK_SAVED_FOR_LATER_PENDING_LABEL]),
             }}
             disabledStates={['pending']}
             className="confirm-mark-complete-btn btn-brand-primary"
@@ -91,7 +94,7 @@ const MarkCompleteModal = ({
         ]}
         open={isOpen && !confirmSuccessful}
         onClose={handleModalOnClose}
-        closeText="Cancel"
+        closeText={intl.formatMessage(messages['modal.btn.cancel'])}
       />
     </MarkCompleteModalContext.Provider>
   );
@@ -110,4 +113,4 @@ MarkCompleteModal.defaultProps = {
   isOpen: false,
 };
 
-export default MarkCompleteModal;
+export default (injectIntl(MarkCompleteModal));
