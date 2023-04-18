@@ -381,7 +381,7 @@ class BaseCourseCard extends Component {
 
           <a  className='custom-link' href={`${config.LMS_BASE_URL}/u/${username}`}>
           {intl.formatMessage(cardMessages['course.cards.completed.view.certificate.profile'])}
-              <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
+              <FontAwesomeIcon className="ml-2 chevron-right" icon={faChevronRight} />
            </a>
         </small>
       );

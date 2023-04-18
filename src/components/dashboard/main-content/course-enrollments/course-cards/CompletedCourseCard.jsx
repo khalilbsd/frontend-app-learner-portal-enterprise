@@ -49,7 +49,7 @@ const CompletedCourseCard = (props) => {
            {intl.formatMessage(messages['course.cards.completed.view.certificate'])}
             <a className='custom-link' href={`${config.LMS_BASE_URL}/u/${username}`}>
               {intl.formatMessage(messages['course.cards.completed.view.certificate.profile'])}
-              <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
+              <FontAwesomeIcon className="ml-2 chevron-right" icon={faChevronRight} />
             </a>
           </p>
         </div>
@@ -59,7 +59,7 @@ const CompletedCourseCard = (props) => {
        {intl.formatMessage(messages['course.cards.completed.to.earn.one'])}
         <a  className='custom-link' href={props.linkToCourse}>
           {intl.formatMessage(messages['course.cards.completed.to.earn.one.retake'])}
-          <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
+          <FontAwesomeIcon className="ml-2 chevron-right" icon={faChevronRight} />
         </a>
       </p>
     )

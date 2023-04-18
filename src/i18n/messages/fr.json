@@ -63,6 +63,10 @@
     ,"tab.programs.list.program.card.status.bubble.remaining":"Restant"
     ,"tab.programs.list.program.card.status.bubble.progress":"En cours"
     ,"tab.programs.list.program.card.status.bubble.completed":"Achevé"
+    ,"course.cards.completed.view.certificate":"Consultez votre certificat sur "
+    ,"course.cards.completed.view.certificate.profile":"votre profil"
+    ,"course.cards.completed.to.earn.one":"Pour obtenir un certificat, "
+    ,"course.cards.completed.to.earn.one.retake":"il faut refaire ce cours"
 
 
 }
