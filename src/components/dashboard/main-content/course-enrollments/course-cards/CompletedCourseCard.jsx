@@ -5,9 +5,12 @@ import { getConfig } from '@edx/frontend-platform/config';
 
 import BaseCourseCard from './BaseCourseCard';
 import ContinueLearningButton from './ContinueLearningButton';
-
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { isCourseEnded } from '../../../../../utils/common';
 import CertificateImg from './images/edx-verified-mini-cert.png';
+import messages from './messages';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CompletedCourseCard = (props) => {
   const user = getAuthenticatedUser();
@@ -17,6 +20,7 @@ const CompletedCourseCard = (props) => {
     linkToCourse,
     courseRunId,
     endDate,
+    intl
   } = props;
   const config = getConfig();
 
@@ -42,18 +46,20 @@ const CompletedCourseCard = (props) => {
         </div>
         <div className="d-flex align-items-center">
           <p className="mb-0">
-            View your certificate on{' '}
-            <a href={`${config.LMS_BASE_URL}/u/${username}`}>
-              your profile →
+           {intl.formatMessage(messages['course.cards.completed.view.certificate'])}
+            <a className='custom-link' href={`${config.LMS_BASE_URL}/u/${username}`}>
+              {intl.formatMessage(messages['course.cards.completed.view.certificate.profile'])}
+              <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
             </a>
           </p>
         </div>
       </div>
     ) : (
       <p className="mb-3">
-        To earn a certificate,{' '}
-        <a href={props.linkToCourse}>
-          retake this course →
+       {intl.formatMessage(messages['course.cards.completed.to.earn.one'])}
+        <a  className='custom-link' href={props.linkToCourse}>
+          {intl.formatMessage(messages['course.cards.completed.to.earn.one.retake'])}
+          <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
         </a>
       </p>
     )
@@ -85,4 +91,4 @@ CompletedCourseCard.defaultProps = {
   endDate: null,
 };
 
-export default CompletedCourseCard;
+export default (injectIntl(CompletedCourseCard));

@@ -84,7 +84,7 @@ function DashboardPage({intl}) {
 
       <div className='main-container'>
         <h2 className="h1 mb-4 mt-4 welcome-title">
-          {userFirstName ? `${intl.formatMessage(messages['welcome.header'])}, ${userFirstName}!` : intl.formatMessage(messages['welcome'])}
+          {userFirstName ? `${intl.formatMessage(messages['welcome.header'])}, ${userFirstName}!` : intl.formatMessage(messages['welcome.header'])}
         </h2>
         <div className='main-tabs-content'>
         <Tabs defaultActiveKey="courses">

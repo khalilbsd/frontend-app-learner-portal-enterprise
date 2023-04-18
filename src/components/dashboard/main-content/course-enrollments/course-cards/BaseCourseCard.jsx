@@ -17,6 +17,10 @@ import { UnenrollModal } from './unenroll';
 import { COURSE_STATUSES, COURSE_PACING } from '../../../../../constants';
 import { injectIntl } from '@edx/frontend-platform/i18n';
 import messages from '../../../messages';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import  cardMessages from './messages'
+
 
 const BADGE_PROPS_BY_COURSE_STATUS = {
   [COURSE_STATUSES.inProgress]: {
@@ -373,9 +377,12 @@ class BaseCourseCard extends Component {
     if (linkToCertificate) {
       return (
         <small className="mb-0">
-          View your certificate on
-          {' '}
-          <a href={`${config.LMS_BASE_URL}/u/${username}`}>your profile →</a>
+          {intl.formatMessage(cardMessages['course.cards.completed.view.certificate'])}
+
+          <a  className='custom-link' href={`${config.LMS_BASE_URL}/u/${username}`}>
+          {intl.formatMessage(cardMessages['course.cards.completed.view.certificate.profile'])}
+              <FontAwesomeIcon className="ml-3 chevron-right" icon={faChevronRight} />
+           </a>
         </small>
       );
     }
