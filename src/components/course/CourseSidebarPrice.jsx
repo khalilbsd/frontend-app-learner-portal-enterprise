@@ -13,13 +13,15 @@ import { ENTERPRISE_OFFER_SUBSIDY_TYPE, LICENSE_SUBSIDY_TYPE } from './data/cons
 import { UserSubsidyContext } from '../enterprise-user-subsidy/UserSubsidy';
 import ContactAdminMailto from '../contact-admin-mailto';
 import { offerHasBookingsLimit } from '../enterprise-user-subsidy/enterprise-offers/data/utils';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-export const INCLUDED_IN_SUBSCRIPTION_MESSAGE = 'Included in your subscription';
-export const FREE_WHEN_APPROVED_MESSAGE = 'Free to me\n(when approved)';
-export const COVERED_BY_ENTERPRISE_OFFER_MESSAGE = 'This course can be purchased with your organization\'s learner credit';
-export const INSUFFICIENT_ENTERPRISE_OFFER_BALANCE = 'Your organization doesn\'t have enough learner credit remaining.';
+export const INCLUDED_IN_SUBSCRIPTION_MESSAGE = 'course.page.price.included';
+export const FREE_WHEN_APPROVED_MESSAGE = 'course.page.price.free';
+export const COVERED_BY_ENTERPRISE_OFFER_MESSAGE = 'course.page.price.covered';
+export const INSUFFICIENT_ENTERPRISE_OFFER_BALANCE = 'course.page.price.insufficient';
 
-const CourseSidebarPrice = () => {
+const CourseSidebarPrice = ({intl}) => {
   const { enterpriseConfig } = useContext(AppContext);
   const { state: courseData } = useContext(CourseContext);
   const { activeCourseRun, userSubsidyApplicableToCourse } = courseData;
@@ -42,7 +44,7 @@ const CourseSidebarPrice = () => {
   const showOrigPrice = !enterpriseConfig.hideCourseOriginalPrice;
   const crossedOutOriginalPrice = (
     <del>
-      <span className="sr-only">Priced reduced from:</span>${originalPriceDisplay} {currency}
+      <span className="sr-only">{intl.formatMessage(messages['course.page.price.reduced.from'])}</span>${originalPriceDisplay} {currency}
     </del>
   );
 
@@ -55,7 +57,7 @@ const CourseSidebarPrice = () => {
             {crossedOutOriginalPrice}
           </div>
         )}
-        <span>{INCLUDED_IN_SUBSCRIPTION_MESSAGE}</span>
+        <span>{intl.formatMessage(messages[INCLUDED_IN_SUBSCRIPTION_MESSAGE])}</span>
       </>
     );
   }
@@ -67,7 +69,7 @@ const CourseSidebarPrice = () => {
     return (
       <span style={{ whiteSpace: 'pre-wrap' }} data-testid="browse-and-request-pricing">
         <s>${originalPriceDisplay} {currency}</s><br />
-        {FREE_WHEN_APPROVED_MESSAGE}
+        {intl.formatMessage(messages[FREE_WHEN_APPROVED_MESSAGE])}
       </span>
     );
   }
@@ -90,8 +92,8 @@ const CourseSidebarPrice = () => {
         <span className="d-block">${originalPriceDisplay} {currency}</span>
         {hasOfferWithInsufficientBalance && (
           <small data-testid="insufficient-offer-balance-text">
-            {INSUFFICIENT_ENTERPRISE_OFFER_BALANCE}{' '}
-            <ContactAdminMailto /> to learn more.
+            {intl.formatMessage(messages[INSUFFICIENT_ENTERPRISE_OFFER_BALANCE])}{' '}
+            <ContactAdminMailto /> {intl.formatMessage(messages['course.page.price.insufficient.learnmore'])}
           </small>
         )}
       </>
@@ -99,7 +101,7 @@ const CourseSidebarPrice = () => {
   }
 
   const discountedPriceMessage = userSubsidyApplicableToCourse?.subsidyType
-   === ENTERPRISE_OFFER_SUBSIDY_TYPE ? COVERED_BY_ENTERPRISE_OFFER_MESSAGE : `Sponsored by ${enterpriseConfig.name}`;
+   === ENTERPRISE_OFFER_SUBSIDY_TYPE ? intl.formatMessage(messages[COVERED_BY_ENTERPRISE_OFFER_MESSAGE]) : `Sponsored by ${enterpriseConfig.name}`;
 
   // Case 4: subsidy found
   const discountedPriceDisplay = `${numberWithPrecision(coursePrice.discounted)} ${currency}`;
@@ -119,4 +121,4 @@ const CourseSidebarPrice = () => {
   );
 };
 
-export default CourseSidebarPrice;
+export default (injectIntl(CourseSidebarPrice));

@@ -12,7 +12,7 @@ import { CourseContext } from './CourseContextProvider';
 import CourseSkills from './CourseSkills';
 import CourseEnrollmentFailedAlert, { ENROLLMENT_SOURCE } from './CourseEnrollmentFailedAlert';
 import CourseRunCards from './CourseRunCards';
-
+import messages from './messages';
 import {
   getDefaultProgram,
   formatProgramType,
@@ -23,8 +23,9 @@ import {
 } from './data/hooks';
 import LicenseRequestedAlert from './LicenseRequestedAlert';
 import SubsidyRequestButton from './SubsidyRequestButton';
+import { injectIntl } from '@edx/frontend-platform/i18n';
 
-export default function CourseHeader() {
+ function CourseHeader({intl}) {
   const { enterpriseConfig } = useContext(AppContext);
   const { state } = useContext(CourseContext);
   const { course, catalog } = state;
@@ -48,7 +49,7 @@ export default function CourseHeader() {
                 <Breadcrumb
                   links={[
                     {
-                      label: 'Find a Course',
+                      label: intl.formatMessage(messages['course.page.header.find']),
                       url: `/${enterpriseConfig.slug}/search`,
                     },
                   ]}
@@ -56,7 +57,7 @@ export default function CourseHeader() {
                 />
               </div>
             )}
-            {partners.length > 0 && (
+            {/* {partners.length > 0 && (
               <div className="mt-4 mb-2">
                 {partners.map(partner => (
                   <a
@@ -74,7 +75,7 @@ export default function CourseHeader() {
                   </a>
                 ))}
               </div>
-            )}
+            )} */}
             <div className={classNames({ 'mb-4': !course.shortDescription })}>
               <h2>{course.title}</h2>
             </div>
@@ -92,13 +93,13 @@ export default function CourseHeader() {
                 <SubsidyRequestButton />
                 {defaultProgram && (
                   <p className="font-weight-bold mt-3 mb-0">
-                    This course is part of a {formatProgramType(defaultProgram.type)}.
+                    {intl.formatMessage(messages['course.page.header.course.program.type'])} {formatProgramType(defaultProgram.type)}.
                   </p>
                 )}
               </>
             ) : (
               <p className="font-weight-bold mt-3 mb-0">
-                This course is not part of your company&apos;s curated course catalog.
+                {intl.formatMessage(messages['course.page.header.course.not.part.enterprise'])}
               </p>
             )}
           </Col>
@@ -112,3 +113,5 @@ export default function CourseHeader() {
     </div>
   );
 }
+
+export default (injectIntl(CourseHeader))

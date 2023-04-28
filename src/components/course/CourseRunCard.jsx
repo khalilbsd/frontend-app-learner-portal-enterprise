@@ -32,13 +32,16 @@ import { useSubsidyDataForCourse } from './enrollment/hooks';
 import { useCourseEnrollmentUrl, useUserHasSubsidyRequestForCourse, useCoursePriceForUserSubsidy } from './data/hooks';
 import { determineEnrollmentType } from './enrollment/utils';
 import { SubsidyRequestsContext } from '../enterprise-subsidy-requests/SubsidyRequestsContextProvider';
+import { getLocale, injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
 const DATE_FORMAT = 'MMM D';
-const DEFAULT_BUTTON_LABEL = 'Enroll';
+const DEFAULT_BUTTON_LABEL = 'course.page.header.courseruns.enroll';
 
 const LicenseSubsidyPriceText = ({
   courseRun,
   userSubsidyApplicableToCourse,
+  intl
 }) => {
   const [coursePrice, currency] = useCoursePriceForUserSubsidy({
     activeCourseRun: courseRun, userSubsidyApplicableToCourse,
@@ -48,9 +51,9 @@ const LicenseSubsidyPriceText = ({
     <>
       <div className="mt-2" data-testid="subsidy-license-price-text">
         <del>
-          <span className="sr-only">Priced reduced from:</span>${numberWithPrecision(coursePrice.list)} {currency}
+          <span className="sr-only">{intl.formatMessage(messages['course.page.header.courseruns.card.reduced'])}</span>${numberWithPrecision(coursePrice.list)} {currency}
         </del>
-        <span>{' '}included in your subscription</span>
+        <span>{intl.formatMessage(messages['course.page.header.courseruns.card.reduced.included'])}</span>
       </div>
     </>
   );
@@ -62,6 +65,7 @@ const CourseRunCard = ({
   userEnrollments,
   courseKey,
   subsidyRequestCatalogsApplicableToCourse,
+  intl
 }) => {
   const {
     availability,
@@ -148,8 +152,8 @@ const CourseRunCard = ({
   const [heading, subHeading, buttonLabel] = useMemo(() => {
     if (courseRunArchived) {
       return [
-        'Course archived',
-        'Future dates to be announced',
+        intl.formatMessage(messages['course.page.header.courseruns.card.archived']),
+        intl.formatMessage(messages['course.page.header.courseruns.card.archived.to.annouced']),
       ];
     }
 
@@ -160,16 +164,17 @@ const CourseRunCard = ({
       ) {
         // Course will be available in the future
         return [
-          'Coming soon',
-          `Enroll after ${moment(start).format(DATE_FORMAT)}`,
-          DEFAULT_BUTTON_LABEL,
+          intl.formatMessage(messages['course.page.header.courseruns.card.archived.coming.soon']),
+          // `Enroll after ${moment(start).format(DATE_FORMAT)}`,
+          intl.formatMessage(messages['course.page.header.courseruns.card.archived.coming.soon.after'], { SOON: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start) }),
+          intl.formatMessage(messages[DEFAULT_BUTTON_LABEL]),
         ];
       }
       // Course no future date availability announced
       return [
-        'Enrollment closed',
-        'Future dates to be announced',
-        DEFAULT_BUTTON_LABEL,
+        intl.formatMessage(messages['course.page.header.courseruns.card.enrollment.closed']),
+        intl.formatMessage(messages['course.page.header.courseruns.card.archived.to.annouced']),
+        intl.formatMessage(messages[DEFAULT_BUTTON_LABEL]),
       ];
     }
 
@@ -177,36 +182,39 @@ const CourseRunCard = ({
       // User is enrolled
       return [
         !isCourseStarted
-          ? `Starts ${moment(start).format(DATE_FORMAT)}`
-          : 'Course started',
-        'You are enrolled',
-        'View course',
+
+          ? intl.formatMessage(messages['course.page.header.courseruns.card.will.start'], { starts_in: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start) })
+          : intl.formatMessage(messages['course.page.header.courseruns.started']),
+        intl.formatMessage(messages['course.page.header.courseruns.enrolled']),
+        intl.formatMessage(messages['course.page.header.courseruns.enrolled.view']),
+
       ];
     }
     // User is not enrolled
     if (isUserEntitledForCourse({ userEntitlements, courseUuid })) {
       // Is entitled for course
       return [
-        'Entitlement found',
+        intl.formatMessage(messages['course.page.header.courseruns.entitlment']),
         '',
-        'View on dashboard',
+       intl.formatMessage(messages['course.page.header.courseruns.entitlment.view.dashbaord']),
       ];
     }
     const tempSubHeading = enrollmentCount > 0
-      ? `${formatStringAsNumber(enrollmentCount)} recently enrolled!`
-      : 'Be the first to enroll!';
 
-    let tempHeading = `${isCourseStarted ? 'Started' : 'Starts'} ${moment(start).format(DATE_FORMAT)}`;
+      ? intl.formatMessage(messages['course.page.header.courseruns.enrollment.count'],{enrollmentCount:formatStringAsNumber(enrollmentCount)})
+      :  intl.formatMessage(messages['course.page.header.courseruns.enrollment.count.first']);
+
+    let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) : intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${(new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start)}`
 
     if (isCourseSelfPaced(pacingType)) {
       if (isCourseStarted) {
-        tempHeading = hasTimeToComplete(courseRun) ? `Starts ${moment().format(DATE_FORMAT)}` : 'Course started';
+        tempHeading = hasTimeToComplete(courseRun) ? `${intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${moment().format(DATE_FORMAT)}` : intl.formatMessage(messages['course.page.header.courseruns.course.started']);
       }
     }
     return [
       tempHeading,
       tempSubHeading,
-      DEFAULT_BUTTON_LABEL,
+      intl.formatMessage(messages[DEFAULT_BUTTON_LABEL]),
     ];
   }, [
     courseRunArchived,
@@ -250,6 +258,7 @@ const CourseRunCard = ({
           {isExperimentVariation1 && shouldShowLicenseSubsidyPriceText && (
             <LicenseSubsidyPriceText
               courseRun={courseRun}
+              intl={intl}
               userSubsidyApplicableToCourse={userSubsidyApplicableToCourse}
             />
           )}
@@ -314,4 +323,4 @@ LicenseSubsidyPriceText.propTypes = {
   }).isRequired,
 };
 
-export default CourseRunCard;
+export default (injectIntl(CourseRunCard));

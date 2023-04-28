@@ -3,10 +3,10 @@
     "tab.courses": "Les formations",
     "tab.programs": "Les programmes",
     "license.activation": "Votre licence a été activée avec succès.",
-    "get.started.with": "Commencez avec groupadoPro est très facile. Il vous suffit de trouver un cours dans le catalogue qui se conforme avec vos attentes, de demander une inscription et de commencer votre parcours d'apprentissage.",
+    "get.started.with": "Commencez avec groupadoPro est très facile. Il vous suffit de trouver une formation dans le catalogue qui se conforme avec vos attentes, de demander une inscription et de commencer votre parcours d'apprentissage.",
     "btn.find.course": "Trouver une formation",
-    "tab.courses.title.recommendation": "Obtenir des recommandations de cours pour vous",
-    "page.search.title": "Recherche de cours et de programmes",
+    "tab.courses.title.recommendation": "Obtenir des recommandations de formation pour vous",
+    "page.search.title": "Recherche de formation et de programmes",
     "search.error.message": "Une erreur s'est produite lors de la recherche de {lowerCaseTitle} correspondant à votre recherche.",
     "search.error.message.try.again": "Veuillez réessayer plus tard.",
     "search.not.found.message": "Aucun {lowerCaseTitle} ne correspond à vos résultats.",
@@ -28,12 +28,12 @@
     "tab.courses.main.dashbaord.my.courses.completed": "Formations terminés",
     "tab.courses.main.dashbaord.my.courses.saved": "Enregistré pour plus tard",
     "tab.courses.main.dashboard.course.card.btn.resume": "Pour continuer",
-    "tab.courses.main.dashboard.course.pace": "Ce cours ",
+    "tab.courses.main.dashboard.course.pace": "Cette formation",
     "tab.courses.main.dashboard.course.pace.is": "s'adapte ",
     "tab.courses.main.dashboard.course.pace.was": " s'est adapté ",
     "tab.courses.main.dashboard.course.pace.type.self": "à votre rythme d'apprentissage.",
     "tab.courses.main.dashboard.course.pace.type.instructor": "aux rythme d'apprentissage de l'instructeur.",
-    "tab.courses.main.dashboard.course.settings.save.later": "Sauvegarder le cours pour plus tard",
+    "tab.courses.main.dashboard.course.settings.save.later": "Sauvegarder la formation pour plus tard",
     "tab.courses.main.dashboard.course.settings.email": "Configuration d'email",
     "tab.courses.main.dashboard.course.settings.unenroll": "Désinscrire"
     ,"tab.courses.main.dashboard.course.settings.unenroll.modal.btn.keep":"continuer à apprendre"
@@ -42,8 +42,8 @@
     ,"tab.courses.main.dashboard.course.settings.save.later.model.title.pending":"Enregistrement pour plus tard..."
     ,"modal.btn.cancel":"Annuler"
     ,"tab.courses.main.dashboard.course.settings.save.later.model.body.asking.confirmation":"Êtes-vous sûr de vouloir enregistrer"
-    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.text":"pour plus tard ? Vous resterez inscrit, mais le cours n'apparaîtra plus comme 'en cours'"
-    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.license.text":"Tant que votre licence est valide, vous pouvez reprendre le cours en cliquant sur 'Déplacer le cours vers En cours' dans la liste des cours enregistrés pour plus tard."
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.text":"pour plus tard ? Vous resterez inscrit, mais la formation n'apparaîtra plus comme 'en cours'"
+    ,"tab.courses.main.dashboard.course.settings.save.later.model.body.license.text":"Tant que votre licence est valide, vous pouvez reprendre la formation en cliquant sur 'Déplacer la formation vers En cours' dans la liste des formations enregistrés pour plus tard."
     ,"tab.programs.not.enrolled.btn":"Explorer les programmes"
     ,"tab.programs.no.enrollment.found":"Vous n'êtes encore inscrit à aucun programme."
     ,"tab.courses.subscription.summary.title":"Statut de l'abonnement"
@@ -67,6 +67,64 @@
     ,"course.cards.completed.view.certificate.profile":"votre profil"
     ,"course.cards.completed.to.earn.one":"Pour obtenir un certificat, "
     ,"course.cards.completed.to.earn.one.retake":"il faut refaire ce cours"
+    ,"program.progress.page.congratulation":"Félicitations !"
+    ,"program.progress.page.congratulation.message":"Vous avez rempli avec succès toutes les conditions requises pour le {PROGRAM_TITLE}."
+    ,"program.progress.page.congratulation.journey":"Votre parcours dans le programme"
+    ,"program.progress.page.congratulation.track":"Suivez et planifiez votre progression à travers les {totalCoursesInProgram} formations de ce programme."
+    ,"program.progress.page.congratulation.certificate":"Pour terminer le programme, vous devez obtenir un certificat vérifié pour chaque cours."
+    ,"program.progress.page.certificate.needs":"Besoin d'un certificat vérifié"
+    ,"program.progress.page.certificate.status":"Statut du certificat :"
+    ,"program.progress.page.certificate.purchased":"Certificat acheté"
+    ,"program.progress.page.certificate.upgrade.veirified":"Passer à la version vérifiée"
+    ,"program.progress.page.courses.progress":"FORMATIONS EN COURS"
+    ,"program.progress.page.courses.enrolled":"Inscrits:"
+    ,"program.progress.page.courses.enrolled.started":"Commencé"
+    ,"program.progress.page.courses.enrolled.view":"Voir la formation"
+    ,"program.progress.page.courses.enrolled.view.archived":"Voir la formation archivée"
+    ,"program.progress.page.courses.remaining":"FORMATIONS RESTANTES"
+    ,"program.progress.page.courses.remaining.startes":"Commence "
+    ,"program.progress.page.courses.remaining.enroll":"S'inscrire maintenant"
+    ,"program.progress.page.courses.sessions.availaible":"Vos sessions disponibles :"
+    ,"program.progress.page.courses.sessions.availaible.learnmore":"Learn More"
 
+,"course.page.header.find":"Trouver une formation"
+,"course.page.header.courseruns.card.reduced":"Prix réduit à partir de :"
+,"course.page.header.courseruns.card.reduced.included":" inclus dans votre abonnement"
+,"course.page.header.courseruns.card.archived":"Cours archivé"
+,"course.page.header.courseruns.card.archived.to.annouced":"Dates à venir"
+,"course.page.header.courseruns.card.archived.coming.soon":"Prochainement"
+,"course.page.header.courseruns.card.archived.coming.soon.after":"S'inscrire après {SOON}"
+,"course.page.header.courseruns.card.enrollment.closed":"Inscription fermée"
+,"course.page.header.courseruns.card.will.start":"Commence {starts_in}"
+,"course.page.header.courseruns.started":"Formation commencée"
+,"course.page.header.courseruns.enrolled":"Inscrits"
+,"course.page.header.courseruns.entitlment":"Entitlement trouvé"
+,"course.page.header.courseruns.entitlment.view.dashbaord":"Vue sur le tableau de bord"
+,"course.page.header.courseruns.enrollment.count":"{enrollmentCount} s'est récemment inscrit!"
+,"course.page.header.courseruns.enrollment.count.first":"Soyez le premier à vous inscrire!"
+,"course.page.header.courseruns.course.started":"Formation commencée"
+,"course.page.header.courseruns.enroll":"S'inscrire"
+,"course.page.header.course.program.type":"Ce cours fait partie d'un"
+,"course.page.header.course.not.part.enterprise":"Ce cours ne fait pas partie du catalogue de cours de votre entreprise."
+,"course.page.length":"Durée"
+,"course.page.length.weeks":"semaines"
+,"course.page.length.week":"semaine"
+,"course.page.effort":"Effort"
+,"course.page.effort.hours":"{hoursPerWeek} heures par semaine"
+,"course.page.price":"Prix"
+,"course.page.price.reduced.from":"Prix réduit à partir de :"
+,"course.page.price.free":"Gratuit pour moi (après approbation)"
+,"course.page.price.covered":"Ce cours peut être acheté avec le crédit d'apprentissage de votre organisation."
+,"course.page.price.insufficient":"Votre organisation n'a plus assez de crédit d'apprentissage."
+,"course.page.price.insufficient.learnmore":" pour en savoir plus."
+,"course.page.subject":"Sujet"
+,"course.page.level":"Niveau"
+,"course.page.language" :"Langue"
+,"course.page.course.type":"Type de formation"
+,"course.page.about.this.course":"A propos de cette formation"
+,"course.page.sponsred.by":"Sponsorisé par"
+,"course.page.sponsred.by.message":" La réalisation de ce cours n'aurait pas été possible sans les généreuses contributions des personnes suivantes"
+,"course.page.learning.what":"Ce que vous apprendrez"
+,"course.page.instructor":"Rencontrez vos instructeurs"
 
 }

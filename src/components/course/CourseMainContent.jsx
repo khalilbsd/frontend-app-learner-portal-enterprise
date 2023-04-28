@@ -7,6 +7,8 @@ import { CourseContext } from './CourseContextProvider';
 import CourseSidebar from './CourseSidebar';
 import CreatedBy from './CreatedBy';
 import VerifiedCertPitch from './VerifiedCertPitch';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
 function formatSponsorTextList(sponsors) {
   const names = sponsors.map(sponsor => sponsor.name);
@@ -28,7 +30,7 @@ function formatSponsorTextList(sponsors) {
   return sponsorTextList;
 }
 
-export default function CourseMainContent() {
+ function CourseMainContent({intl}) {
   const { config } = useContext(AppContext);
   const { state } = useContext(CourseContext);
   const { course, activeCourseRun } = state;
@@ -50,7 +52,7 @@ export default function CourseMainContent() {
             labelToMinimize: 'Collapse about this course',
             id: 'about-this-course',
           }}
-          heading={<h3>About this course</h3>}
+          heading={<h3>{intl.formatMessage(messages['course.page.about.this.course'])}</h3>}
         >
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: course.fullDescription }} />
@@ -58,7 +60,7 @@ export default function CourseMainContent() {
       )}
       {course.sponsors && course.sponsors.length > 0 && (
         <div className="mb-5">
-          <h3>Sponsored by</h3>
+          <h3>{intl.formatMessage(messages['course.page.sponsred.by'])}</h3>
           <div className="row no-gutters mt-3">
             {course.sponsors.map((sponsor) => (
               <div className="col-lg-6 mb-3" key={sponsor.name}>
@@ -83,8 +85,7 @@ export default function CourseMainContent() {
             ))}
           </div>
           <p>
-            The production of this course would not have been possible without the
-            generous contributions of {formatSponsorTextList(course.sponsors)}.
+           {intl.formatMessage(messages['course.page.sponsred.by.message'])} {formatSponsorTextList(course.sponsors)}.
           </p>
         </div>
       )}
@@ -96,7 +97,7 @@ export default function CourseMainContent() {
             labelToMinimize: 'Collapse what you\'ll learn',
             id: 'what-youll-learn',
           }}
-          heading={<h3>What you&apos;ll learn</h3>}
+          heading={<h3>{intl.formatMessage(messages['course.page.learning.what'])}</h3>}
         >
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: course.outcome }} />
@@ -110,7 +111,7 @@ export default function CourseMainContent() {
             labelToMinimize: 'Collapse syllabus',
             id: 'course-syllabus',
           }}
-          heading={<h3>Syllabus</h3>}
+          heading={<h3>{intl.formatMessage(messages['course.page.syllabus'])}</h3>}
         >
           {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: course.syllabusRaw }} />
@@ -140,7 +141,7 @@ export default function CourseMainContent() {
           <div dangerouslySetInnerHTML={{ __html: course.additionalInformation }} />
         </div>
       )}
-      {activeCourseRun.hasOfacRestrictions && (
+      {/* {activeCourseRun.hasOfacRestrictions && (
         <div className="mb-5">
           <h3>Who can take this course?</h3>
           <p>
@@ -153,7 +154,10 @@ export default function CourseMainContent() {
             everyone, no matter where they live.
           </p>
         </div>
-      )}
+      )} */}
     </>
   );
 }
+
+
+export default (injectIntl(CourseMainContent))

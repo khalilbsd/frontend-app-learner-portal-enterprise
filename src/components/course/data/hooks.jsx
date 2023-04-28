@@ -33,6 +33,7 @@ import {
   ENROLLMENT_COURSE_RUN_KEY_QUERY_PARAM,
 } from './constants';
 import { pushEvent, EVENTS } from '../../../utils/optimizely';
+import messages from '../messages';
 
 // How long to delay an event, so that we allow enough time for any async analytics event call to resolve
 const CLICK_DELAY_MS = 300; // 300ms replicates Segment's ``trackLink`` function
@@ -181,7 +182,7 @@ export function useCoursePartners(course) {
   return [partners, label];
 }
 
-export function useCourseRunWeeksToComplete(courseRun) {
+export function useCourseRunWeeksToComplete(courseRun,intl) {
   const [weeksToComplete, setWeeksToComplete] = useState(undefined);
   const [label, setLabel] = useState(undefined);
 
@@ -189,9 +190,9 @@ export function useCourseRunWeeksToComplete(courseRun) {
     if (courseRun && courseRun.weeksToComplete) {
       setWeeksToComplete(courseRun.weeksToComplete);
       if (courseRun.weeksToComplete > 1 || courseRun.weeksToComplete === 0) {
-        setLabel('weeks');
+        setLabel(intl.formatMessages(messages['course.page.length.weeks']));
       } else {
-        setLabel('week');
+        setLabel(intl.formatMessages(messages['course.page.length.week']));
       }
     }
   }, [courseRun]);

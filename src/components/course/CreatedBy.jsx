@@ -4,8 +4,10 @@ import { Hyperlink } from '@edx/paragon';
 
 import { CourseContext } from './CourseContextProvider';
 import { useCoursePartners } from './data/hooks';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-export default function CreatedBy() {
+function CreatedBy({intl}) {
   const { config } = useContext(AppContext);
   const { state } = useContext(CourseContext);
   const { course, activeCourseRun } = state;
@@ -19,7 +21,7 @@ export default function CreatedBy() {
 
   return (
     <div className="mb-5">
-      <h3>Meet your instructors</h3>
+      <h3>{intl.formatMessage(messages['course.page.instructor'])}</h3>
       {partners.length > 0 && (
         <div className="row no-gutters mt-3">
           {partners.map(partner => (
@@ -74,3 +76,5 @@ export default function CreatedBy() {
     </div>
   );
 }
+
+export default  (injectIntl(CreatedBy))

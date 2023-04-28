@@ -27,13 +27,15 @@ import {
   useCourseTranscriptLanguages,
   useCoursePacingType,
 } from './data/hooks';
+import { injectIntl } from '@edx/frontend-platform/i18n';
+import messages from './messages';
 
-export default function CourseSidebar() {
+function CourseSidebar({intl}) {
   const { state } = useContext(CourseContext);
   const { course, activeCourseRun } = state;
   const { primarySubject } = useCourseSubjects(course);
   const [partners, institutionLabel] = useCoursePartners(course);
-  const [weeksToComplete, weeksLabel] = useCourseRunWeeksToComplete(activeCourseRun);
+  const [weeksToComplete, weeksLabel] = useCourseRunWeeksToComplete(activeCourseRun,intl);
   const [transcriptLanguages, transcriptLabel] = useCourseTranscriptLanguages(activeCourseRun);
   const [pacingType, pacingTypeContent] = useCoursePacingType(activeCourseRun);
   const { enterpriseConfig } = useContext(AppContext);
@@ -46,22 +48,22 @@ export default function CourseSidebar() {
             {hasTruthyValue(activeCourseRun.weeksToComplete) && (
               <CourseSidebarListItem
                 icon={faClock}
-                label="Length"
+                label={isDefinedAndNotNull.formatMessage(messages['course.page.length'])}
                 content={`${weeksToComplete} ${weeksLabel}`}
               />
             )}
             {hasTruthyValue([activeCourseRun.minEffort, activeCourseRun.maxEffort]) && (
               <CourseSidebarListItem
                 icon={faTachometerAlt}
-                label="Effort"
-                content={`${activeCourseRun.minEffort}-${activeCourseRun.maxEffort} hours per week`}
+                label={intl.formatMessage(messages['course.page.effort'])}
+                content={intl.formatMessage(messages['course.page.effort.hours'],{hoursPerWeek:activeCourseRun.minEffort-activeCourseRun.maxEffort})}
               />
             )}
           </>
         )}
         <CourseSidebarListItem
           icon={faTag}
-          label="Price"
+          label={intl.formatMessage(messages['course.page.price'])}
           content={<CourseSidebarPrice />}
         />
         {partners?.length > 0 && (
@@ -92,7 +94,7 @@ export default function CourseSidebar() {
         {primarySubject && (
           <CourseSidebarListItem
             icon={faGraduationCap}
-            label="Subject"
+            label={intl.formatMessage(messages['course.page.subject'])}
             content={(
               <Hyperlink
                 destination={primarySubject.url}
@@ -115,14 +117,14 @@ export default function CourseSidebar() {
         {activeCourseRun.levelType && (
           <CourseSidebarListItem
             icon={faCertificate}
-            label="Level"
+            label={intl.formatMessage(messages['course.page.level'])}
             content={course.levelType}
           />
         )}
         {activeCourseRun.contentLanguage && (
           <CourseSidebarListItem
             icon={faUniversity}
-            label="Language"
+            label={intl.formatMessage(messages['course.page.language'])}
             content={ISO6391.getNativeName(activeCourseRun.contentLanguage.slice(0, 2))}
           />
         )}
@@ -138,7 +140,7 @@ export default function CourseSidebar() {
         {pacingType && (
           <CourseSidebarListItem
             icon={faUser}
-            label="Course Type"
+            label={intl.formatMessage(messages['course.page.course.type'])}
             content={pacingTypeContent}
           />
         )}
@@ -156,3 +158,5 @@ export default function CourseSidebar() {
     </>
   );
 }
+
+export default (injectIntl(CourseSidebar))
