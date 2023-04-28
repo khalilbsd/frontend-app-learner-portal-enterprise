@@ -23,7 +23,7 @@ const SupportInformation = ({ className,intl }) => {
 
     if (adminEmails.length > 0) {
       return (
-        <MailtoLink to={adminEmails}>
+        <MailtoLink to={"pro@groupado.com"}>
           {message}
         </MailtoLink>
       );
@@ -41,7 +41,7 @@ const SupportInformation = ({ className,intl }) => {
       <p>
         {intl.formatMessage(messages['support.technical.visit'])}{' '}
         <Hyperlink
-          destination={config.LEARNER_SUPPORT_URL}
+          destination={"https://pro.groupado.com"}
           target="_blank"
           rel="noopener noreferrer"
         >

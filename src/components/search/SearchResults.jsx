@@ -33,6 +33,8 @@ const SearchResults = ({
   const nbHits = useNbHitsFromSearchResults(searchResults);
   const linkText = `Show (${nbHits})`;
 
+
+  console.log(nbHits)
   // To prevent from showing same error twice, we only render the StatusAlert when course results are zero */
   const showMessage = (type, heading) => {
     if (isDefinedAndNotNull(type)) {
