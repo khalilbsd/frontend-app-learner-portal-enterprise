@@ -204,7 +204,7 @@ const CourseRunCard = ({
       ? intl.formatMessage(messages['course.page.header.courseruns.enrollment.count'],{enrollmentCount:formatStringAsNumber(enrollmentCount)})
       :  intl.formatMessage(messages['course.page.header.courseruns.enrollment.count.first']);
 
-    let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) : intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${(new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start)}`
+    let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) : intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${start}}`
 
     if (isCourseSelfPaced(pacingType)) {
       if (isCourseStarted) {
