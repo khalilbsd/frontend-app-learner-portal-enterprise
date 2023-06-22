@@ -166,7 +166,7 @@ const CourseRunCard = ({
         return [
           intl.formatMessage(messages['course.page.header.courseruns.card.archived.coming.soon']),
           // `Enroll after ${moment(start).format(DATE_FORMAT)}`,
-          intl.formatMessage(messages['course.page.header.courseruns.card.archived.coming.soon.after'], { SOON: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start) }),
+          intl.formatMessage(messages['course.page.header.courseruns.card.archived.coming.soon.after'], { SOON: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(new Date(start)) }),
           intl.formatMessage(messages[DEFAULT_BUTTON_LABEL]),
         ];
       }
@@ -183,7 +183,7 @@ const CourseRunCard = ({
       return [
         !isCourseStarted
 
-          ? intl.formatMessage(messages['course.page.header.courseruns.card.will.start'], { starts_in: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start) })
+          ? intl.formatMessage(messages['course.page.header.courseruns.card.will.start'], { starts_in: (new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(new Date(start)) })
           : intl.formatMessage(messages['course.page.header.courseruns.started']),
         intl.formatMessage(messages['course.page.header.courseruns.enrolled']),
         intl.formatMessage(messages['course.page.header.courseruns.enrolled.view']),
@@ -204,8 +204,11 @@ const CourseRunCard = ({
       ? intl.formatMessage(messages['course.page.header.courseruns.enrollment.count'],{enrollmentCount:formatStringAsNumber(enrollmentCount)})
       :  intl.formatMessage(messages['course.page.header.courseruns.enrollment.count.first']);
 
-    let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) : intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${start}}`
-
+    // let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) : intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${(new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' })).format(start)}`
+    let tempHeading = `${isCourseStarted ? intl.formatMessage(messages['course.page.header.courseruns.started']) :
+    intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${
+    new Intl.DateTimeFormat(getLocale(), { weekday: 'long', month: 'short', day: 'numeric' }).format(new Date(start))
+  }`;
     if (isCourseSelfPaced(pacingType)) {
       if (isCourseStarted) {
         tempHeading = hasTimeToComplete(courseRun) ? `${intl.formatMessage(messages['course.page.header.courseruns.starts'])} ${moment().format(DATE_FORMAT)}` : intl.formatMessage(messages['course.page.header.courseruns.course.started']);
